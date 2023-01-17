@@ -13,5 +13,7 @@
 - **MinIO**: 在云服务器上安装**MinIO**高性能对象存储来对项目中的图片进行存储
 - **Elasticsearch**：搜索引擎提供便捷、快速、多功能的查询API，如聚合、过滤、范围、模糊等查询
 
+
 **weblog项目的业务设计**
+
 ![image](https://user-images.githubusercontent.com/105648852/212812633-9f9f759c-b45d-495a-9bbc-38bbcedd84da.png)
