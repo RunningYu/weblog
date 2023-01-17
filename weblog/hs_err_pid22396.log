@@ -1,0 +1,574 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (malloc) failed to allocate 131088 bytes for Chunk::new
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   The process is running with CompressedOops enabled, and the Java Heap may be blocking the growth of the native heap
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+#   JVM is running with Zero Based Compressed Oops mode in which the Java heap is
+#     placed in the first 32GB address space. The Java Heap base address is the
+#     maximum limit for the native heap growth. Please use -XX:HeapBaseMinAddress
+#     to set the Java Heap base and to place the Java Heap above 32GB virtual address.
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (allocation.cpp:389), pid=22396, tid=0x0000000000005fa0
+#
+# JRE version: OpenJDK Runtime Environment (8.0_312-b07) (build 1.8.0_312-b07)
+# Java VM: OpenJDK 64-Bit Server VM (25.312-b07 mixed mode windows-amd64 compressed oops)
+# Failed to write core dump. Minidumps are not enabled by default on client versions of Windows
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00000262cf655000):  JavaThread "C2 CompilerThread1" daemon [_thread_in_native, id=24480, stack(0x0000008a00400000,0x0000008a00500000)]
+
+Stack: [0x0000008a00400000,0x0000008a00500000]
+[error occurred during error reporting (printing stack bounds), id 0xc0000005]
+
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+
+
+Current CompileTask:
+C2:  22509 6022       4       org.springframework.core.ResolvableType::resolveType (151 bytes)
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x00000262d0104800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#166-1" [_thread_blocked, id=20196, stack(0x0000008a0ee00000,0x0000008a0ef00000)]
+  0x00000262d00fe000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#167-1" [_thread_blocked, id=5904, stack(0x0000008a0ed00000,0x0000008a0ee00000)]
+  0x00000262d00fc800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#168-1" [_thread_blocked, id=6116, stack(0x0000008a0ec00000,0x0000008a0ed00000)]
+  0x00000262d0103800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#169-1" [_thread_blocked, id=5644, stack(0x0000008a0eb00000,0x0000008a0ec00000)]
+  0x00000262d00ff000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#162-1" [_thread_blocked, id=21440, stack(0x0000008a0ea00000,0x0000008a0eb00000)]
+  0x00000262d00fb800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#163-1" [_thread_blocked, id=2084, stack(0x0000008a0e900000,0x0000008a0ea00000)]
+  0x00000262d00ff800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#164-1" [_thread_blocked, id=17048, stack(0x0000008a0e800000,0x0000008a0e900000)]
+  0x00000262d0103000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#165-1" [_thread_blocked, id=6296, stack(0x0000008a0e700000,0x0000008a0e800000)]
+  0x00000262d0100800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#80-1" [_thread_blocked, id=10988, stack(0x0000008a0e600000,0x0000008a0e700000)]
+  0x00000262d0101000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#82-1" [_thread_blocked, id=22388, stack(0x0000008a0e500000,0x0000008a0e600000)]
+  0x00000262d00fb000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#81-1" [_thread_blocked, id=12404, stack(0x0000008a0e400000,0x0000008a0e500000)]
+  0x00000262d0102000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#84-1" [_thread_blocked, id=7448, stack(0x0000008a0e300000,0x0000008a0e400000)]
+  0x00000262d07b0800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#83-1" [_thread_blocked, id=6464, stack(0x0000008a0e200000,0x0000008a0e300000)]
+  0x00000262d07af800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#160-1" [_thread_blocked, id=17560, stack(0x0000008a0e100000,0x0000008a0e200000)]
+  0x00000262d07af000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#86-1" [_thread_blocked, id=14252, stack(0x0000008a0e000000,0x0000008a0e100000)]
+  0x00000262d07a7800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#161-1" [_thread_blocked, id=13572, stack(0x0000008a0df00000,0x0000008a0e000000)]
+  0x00000262d07ae000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#85-1" [_thread_blocked, id=23180, stack(0x0000008a0de00000,0x0000008a0df00000)]
+  0x00000262d07ad000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#88-1" [_thread_blocked, id=10268, stack(0x0000008a0dd00000,0x0000008a0de00000)]
+  0x00000262d07a9800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#87-1" [_thread_blocked, id=5016, stack(0x0000008a0dc00000,0x0000008a0dd00000)]
+  0x00000262d07a5800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#89-1" [_thread_blocked, id=19752, stack(0x0000008a0db00000,0x0000008a0dc00000)]
+  0x00000262d07aa000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#155-1" [_thread_blocked, id=15036, stack(0x0000008a0da00000,0x0000008a0db00000)]
+  0x00000262d07a8800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#156-1" [_thread_blocked, id=16244, stack(0x0000008a0d900000,0x0000008a0da00000)]
+  0x00000262d07ac800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#157-1" [_thread_blocked, id=20412, stack(0x0000008a0d800000,0x0000008a0d900000)]
+  0x00000262d07ab800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#158-1" [_thread_blocked, id=15364, stack(0x0000008a0d700000,0x0000008a0d800000)]
+  0x00000262d07ab000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#151-1" [_thread_blocked, id=23112, stack(0x0000008a0d600000,0x0000008a0d700000)]
+  0x00000262d07a0000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#152-1" [_thread_blocked, id=7316, stack(0x0000008a0d500000,0x0000008a0d600000)]
+  0x00000262d07a3000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#153-1" [_thread_blocked, id=5592, stack(0x0000008a0d400000,0x0000008a0d500000)]
+  0x00000262d07a7000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#154-1" [_thread_blocked, id=18300, stack(0x0000008a0d300000,0x0000008a0d400000)]
+  0x00000262d07a0800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#159-1" [_thread_blocked, id=10180, stack(0x0000008a0d200000,0x0000008a0d300000)]
+  0x00000262d07a6000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#91-1" [_thread_blocked, id=2900, stack(0x0000008a0d100000,0x0000008a0d200000)]
+  0x00000262d07a2000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#90-1" [_thread_blocked, id=4708, stack(0x0000008a0d000000,0x0000008a0d100000)]
+  0x00000262d07a4800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#93-1" [_thread_blocked, id=21220, stack(0x0000008a0cf00000,0x0000008a0d000000)]
+  0x00000262d07a4000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#92-1" [_thread_blocked, id=19644, stack(0x0000008a0ce00000,0x0000008a0cf00000)]
+  0x00000262d079b000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#95-1" [_thread_blocked, id=22296, stack(0x0000008a0cd00000,0x0000008a0ce00000)]
+  0x00000262d079c800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#94-1" [_thread_blocked, id=6880, stack(0x0000008a0cc00000,0x0000008a0cd00000)]
+  0x00000262d07a1800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#97-1" [_thread_blocked, id=2076, stack(0x0000008a0cb00000,0x0000008a0cc00000)]
+  0x00000262d079d800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#150-1" [_thread_blocked, id=23080, stack(0x0000008a0ca00000,0x0000008a0cb00000)]
+  0x00000262d079e800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#96-1" [_thread_blocked, id=11488, stack(0x0000008a0c900000,0x0000008a0ca00000)]
+  0x00000262d079f000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#99-1" [_thread_blocked, id=21868, stack(0x0000008a0c800000,0x0000008a0c900000)]
+  0x00000262d079c000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#11-1" [_thread_blocked, id=15124, stack(0x0000008a0c700000,0x0000008a0c800000)]
+  0x00000262d0793800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#98-1" [_thread_blocked, id=14436, stack(0x0000008a0c600000,0x0000008a0c700000)]
+  0x00000262d079a800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#10-1" [_thread_blocked, id=23244, stack(0x0000008a0c500000,0x0000008a0c600000)]
+  0x00000262d0796800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#13-1" [_thread_blocked, id=20912, stack(0x0000008a0c400000,0x0000008a0c500000)]
+  0x00000262d0795800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#12-1" [_thread_blocked, id=11236, stack(0x0000008a0c300000,0x0000008a0c400000)]
+  0x00000262d0795000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#144-1" [_thread_blocked, id=19996, stack(0x0000008a0c200000,0x0000008a0c300000)]
+  0x00000262d0799800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#59-1" [_thread_blocked, id=24116, stack(0x0000008a0c100000,0x0000008a0c200000)]
+  0x00000262d0792800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#145-1" [_thread_blocked, id=23612, stack(0x0000008a0c000000,0x0000008a0c100000)]
+  0x00000262d0798000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#58-1" [_thread_blocked, id=16392, stack(0x0000008a0bf00000,0x0000008a0c000000)]
+  0x00000262d0794000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#146-1" [_thread_blocked, id=24084, stack(0x0000008a0be00000,0x0000008a0bf00000)]
+  0x00000262d0799000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#147-1" [_thread_blocked, id=13344, stack(0x0000008a0bd00000,0x0000008a0be00000)]
+  0x00000262d0792000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#140-1" [_thread_blocked, id=15128, stack(0x0000008a0bc00000,0x0000008a0bd00000)]
+  0x00000262d0797800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#141-1" [_thread_blocked, id=13984, stack(0x0000008a0bb00000,0x0000008a0bc00000)]
+  0x00000262d70e6800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#142-1" [_thread_blocked, id=13896, stack(0x0000008a0ba00000,0x0000008a0bb00000)]
+  0x00000262d70e6000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#143-1" [_thread_blocked, id=6400, stack(0x0000008a0b900000,0x0000008a0ba00000)]
+  0x00000262d70e2800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#148-1" [_thread_blocked, id=19156, stack(0x0000008a0b800000,0x0000008a0b900000)]
+  0x00000262d70e2000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#149-1" [_thread_blocked, id=16576, stack(0x0000008a0b700000,0x0000008a0b800000)]
+  0x00000262d70e3800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#60-1" [_thread_blocked, id=11000, stack(0x0000008a0b600000,0x0000008a0b700000)]
+  0x00000262d70e1000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#62-1" [_thread_blocked, id=20608, stack(0x0000008a0b500000,0x0000008a0b600000)]
+  0x00000262d70e5000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#61-1" [_thread_blocked, id=8856, stack(0x0000008a0b400000,0x0000008a0b500000)]
+  0x00000262d70e7800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#64-1" [_thread_blocked, id=16056, stack(0x0000008a0b300000,0x0000008a0b400000)]
+  0x00000262d70e8000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#63-1" [_thread_blocked, id=5804, stack(0x0000008a0b200000,0x0000008a0b300000)]
+  0x00000262d70e4800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#66-1" [_thread_blocked, id=17596, stack(0x0000008a0b100000,0x0000008a0b200000)]
+  0x00000262d70da000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#65-1" [_thread_blocked, id=5660, stack(0x0000008a0b000000,0x0000008a0b100000)]
+  0x00000262d70d9800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#68-1" [_thread_blocked, id=1748, stack(0x0000008a0af00000,0x0000008a0b000000)]
+  0x00000262d70e0800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#67-1" [_thread_blocked, id=6156, stack(0x0000008a0ae00000,0x0000008a0af00000)]
+  0x00000262d70de000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#133-1" [_thread_blocked, id=11240, stack(0x0000008a0ad00000,0x0000008a0ae00000)]
+  0x00000262d70dc800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#134-1" [_thread_blocked, id=19860, stack(0x0000008a0ac00000,0x0000008a0ad00000)]
+  0x00000262d70db800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#69-1" [_thread_blocked, id=5444, stack(0x0000008a0ab00000,0x0000008a0ac00000)]
+  0x00000262d70df800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#135-1" [_thread_blocked, id=24828, stack(0x0000008a0aa00000,0x0000008a0ab00000)]
+  0x00000262d70df000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#136-1" [_thread_blocked, id=13780, stack(0x0000008a0a900000,0x0000008a0aa00000)]
+  0x00000262d70dd000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#130-1" [_thread_blocked, id=12256, stack(0x0000008a0a800000,0x0000008a0a900000)]
+  0x00000262d5092000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#131-1" [_thread_blocked, id=23484, stack(0x0000008a0a700000,0x0000008a0a800000)]
+  0x00000262d5093000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#132-1" [_thread_blocked, id=3996, stack(0x0000008a0a600000,0x0000008a0a700000)]
+  0x00000262d5090000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#137-1" [_thread_blocked, id=16528, stack(0x0000008a0a500000,0x0000008a0a600000)]
+  0x00000262d5091800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#138-1" [_thread_blocked, id=5448, stack(0x0000008a0a400000,0x0000008a0a500000)]
+  0x00000262d5090800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#139-1" [_thread_blocked, id=8988, stack(0x0000008a0a300000,0x0000008a0a400000)]
+  0x00000262d508e800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#71-1" [_thread_blocked, id=14104, stack(0x0000008a0a200000,0x0000008a0a300000)]
+  0x00000262d508f000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#70-1" [_thread_blocked, id=15648, stack(0x0000008a0a100000,0x0000008a0a200000)]
+  0x00000262d5086800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#73-1" [_thread_blocked, id=2368, stack(0x0000008a0a000000,0x0000008a0a100000)]
+  0x00000262d508c800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#72-1" [_thread_blocked, id=6344, stack(0x0000008a09f00000,0x0000008a0a000000)]
+  0x00000262d508c000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#75-1" [_thread_blocked, id=11024, stack(0x0000008a09e00000,0x0000008a09f00000)]
+  0x00000262d508b000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#74-1" [_thread_blocked, id=23716, stack(0x0000008a09d00000,0x0000008a09e00000)]
+  0x00000262d508a800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#77-1" [_thread_blocked, id=18168, stack(0x0000008a09c00000,0x0000008a09d00000)]
+  0x00000262d5089000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#76-1" [_thread_blocked, id=23696, stack(0x0000008a09b00000,0x0000008a09c00000)]
+  0x00000262d508d800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#79-1" [_thread_blocked, id=11392, stack(0x0000008a09a00000,0x0000008a09b00000)]
+  0x00000262d5084000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#78-1" [_thread_blocked, id=21808, stack(0x0000008a09900000,0x0000008a09a00000)]
+  0x00000262d5085800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#122-1" [_thread_blocked, id=14820, stack(0x0000008a09800000,0x0000008a09900000)]
+  0x00000262d5088000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#37-1" [_thread_blocked, id=11020, stack(0x0000008a09700000,0x0000008a09800000)]
+  0x00000262d5087800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#123-1" [_thread_blocked, id=25316, stack(0x0000008a09600000,0x0000008a09700000)]
+  0x00000262d5089800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#36-1" [_thread_blocked, id=13808, stack(0x0000008a09500000,0x0000008a09600000)]
+  0x00000262d5085000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#124-1" [_thread_blocked, id=24748, stack(0x0000008a09400000,0x0000008a09500000)]
+  0x00000262d5421800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#39-1" [_thread_blocked, id=19772, stack(0x0000008a09300000,0x0000008a09400000)]
+  0x00000262d5420000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#125-1" [_thread_blocked, id=22600, stack(0x0000008a09200000,0x0000008a09300000)]
+  0x00000262d541f800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#38-1" [_thread_blocked, id=17304, stack(0x0000008a09100000,0x0000008a09200000)]
+  0x00000262d5423800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#120-1" [_thread_blocked, id=16104, stack(0x0000008a09000000,0x0000008a09100000)]
+  0x00000262d5424000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#121-1" [_thread_blocked, id=25408, stack(0x0000008a08f00000,0x0000008a09000000)]
+  0x00000262d5421000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#126-1" [_thread_blocked, id=4456, stack(0x0000008a08e00000,0x0000008a08f00000)]
+  0x00000262d5422800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#127-1" [_thread_blocked, id=12504, stack(0x0000008a08d00000,0x0000008a08e00000)]
+  0x00000262d5417800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#128-1" [_thread_blocked, id=20600, stack(0x0000008a08c00000,0x0000008a08d00000)]
+  0x00000262d541e800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#129-1" [_thread_blocked, id=7044, stack(0x0000008a08b00000,0x0000008a08c00000)]
+  0x00000262d541e000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#40-1" [_thread_blocked, id=1484, stack(0x0000008a08a00000,0x0000008a08b00000)]
+  0x00000262d5416000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#42-1" [_thread_blocked, id=17252, stack(0x0000008a08900000,0x0000008a08a00000)]
+  0x00000262d541d000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#41-1" [_thread_blocked, id=4572, stack(0x0000008a08800000,0x0000008a08900000)]
+  0x00000262d5415000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#44-1" [_thread_blocked, id=7728, stack(0x0000008a08700000,0x0000008a08800000)]
+  0x00000262d5416800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#43-1" [_thread_blocked, id=19380, stack(0x0000008a08600000,0x0000008a08700000)]
+  0x00000262d5418800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#46-1" [_thread_blocked, id=3756, stack(0x0000008a08500000,0x0000008a08600000)]
+  0x00000262d541c000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#45-1" [_thread_blocked, id=21732, stack(0x0000008a08400000,0x0000008a08500000)]
+  0x00000262d541b800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#111-1" [_thread_blocked, id=7140, stack(0x0000008a08300000,0x0000008a08400000)]
+  0x00000262d5419000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#48-1" [_thread_blocked, id=25028, stack(0x0000008a08200000,0x0000008a08300000)]
+  0x00000262d541a800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#112-1" [_thread_blocked, id=11764, stack(0x0000008a08100000,0x0000008a08200000)]
+  0x00000262d541a000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#47-1" [_thread_blocked, id=4340, stack(0x0000008a08000000,0x0000008a08100000)]
+  0x00000262d4e09800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#113-1" [_thread_blocked, id=11824, stack(0x0000008a07f00000,0x0000008a08000000)]
+  0x00000262d4e0c800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#114-1" [_thread_blocked, id=20328, stack(0x0000008a07e00000,0x0000008a07f00000)]
+  0x00000262d4e10800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#49-1" [_thread_blocked, id=16960, stack(0x0000008a07d00000,0x0000008a07e00000)]
+  0x00000262d4e10000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#9-1" [_thread_blocked, id=13392, stack(0x0000008a07c00000,0x0000008a07d00000)]
+  0x00000262d4e0f000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#8-1" [_thread_blocked, id=9656, stack(0x0000008a07b00000,0x0000008a07c00000)]
+  0x00000262d4e0a800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#7-1" [_thread_blocked, id=16464, stack(0x0000008a07a00000,0x0000008a07b00000)]
+  0x00000262d4e0c000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#6-1" [_thread_blocked, id=13104, stack(0x0000008a07900000,0x0000008a07a00000)]
+  0x00000262d4e0b000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#110-1" [_thread_blocked, id=4844, stack(0x0000008a07800000,0x0000008a07900000)]
+  0x00000262d4e0e800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#5-1" [_thread_blocked, id=20824, stack(0x0000008a07700000,0x0000008a07800000)]
+  0x00000262d4e0d800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#119-1" [_thread_blocked, id=21304, stack(0x0000008a07600000,0x0000008a07700000)]
+  0x00000262d4e01800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#4-1" [_thread_blocked, id=18800, stack(0x0000008a07500000,0x0000008a07600000)]
+  0x00000262d4e04000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-1" [_thread_blocked, id=15956, stack(0x0000008a07400000,0x0000008a07500000)]
+  0x00000262d4e03800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#2-1" [_thread_blocked, id=21804, stack(0x0000008a07300000,0x0000008a07400000)]
+  0x00000262d4e09000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-1" [_thread_blocked, id=13656, stack(0x0000008a07200000,0x0000008a07300000)]
+  0x00000262d4e08000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#115-1" [_thread_blocked, id=16524, stack(0x0000008a07100000,0x0000008a07200000)]
+  0x00000262d4e06800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1" [_thread_blocked, id=19220, stack(0x0000008a07000000,0x0000008a07100000)]
+  0x00000262d4e07000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#116-1" [_thread_blocked, id=5136, stack(0x0000008a06f00000,0x0000008a07000000)]
+  0x00000262d4e05800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#117-1" [_thread_blocked, id=19284, stack(0x0000008a06e00000,0x0000008a06f00000)]
+  0x00000262d4e02800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#118-1" [_thread_blocked, id=9228, stack(0x0000008a06d00000,0x0000008a06e00000)]
+  0x00000262d4e05000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#51-1" [_thread_blocked, id=8168, stack(0x0000008a06c00000,0x0000008a06d00000)]
+  0x00000262cfcff800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#50-1" [_thread_blocked, id=21744, stack(0x0000008a06b00000,0x0000008a06c00000)]
+  0x00000262cfcfd000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#53-1" [_thread_blocked, id=1376, stack(0x0000008a06a00000,0x0000008a06b00000)]
+  0x00000262cfcfe800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#52-1" [_thread_blocked, id=22552, stack(0x0000008a06900000,0x0000008a06a00000)]
+  0x00000262cfcfc800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#55-1" [_thread_blocked, id=5452, stack(0x0000008a06800000,0x0000008a06900000)]
+  0x00000262cfcfb800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#54-1" [_thread_blocked, id=2408, stack(0x0000008a06700000,0x0000008a06800000)]
+  0x00000262cfcfe000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#57-1" [_thread_blocked, id=16008, stack(0x0000008a06600000,0x0000008a06700000)]
+  0x00000262cfcfb000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#56-1" [_thread_blocked, id=23884, stack(0x0000008a06500000,0x0000008a06600000)]
+  0x00000262cfcf3000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#100-1" [_thread_blocked, id=23496, stack(0x0000008a06400000,0x0000008a06500000)]
+  0x00000262cfcf3800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#15-1" [_thread_blocked, id=10756, stack(0x0000008a06300000,0x0000008a06400000)]
+  0x00000262cfcfa000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#101-1" [_thread_blocked, id=23036, stack(0x0000008a06200000,0x0000008a06300000)]
+  0x00000262cfcf9000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#14-1" [_thread_blocked, id=19908, stack(0x0000008a06100000,0x0000008a06200000)]
+  0x00000262cfcf2000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#102-1" [_thread_blocked, id=11820, stack(0x0000008a06000000,0x0000008a06100000)]
+  0x00000262cfcf6000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#17-1" [_thread_blocked, id=22484, stack(0x0000008a05f00000,0x0000008a06000000)]
+  0x00000262cfcf8800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#103-1" [_thread_blocked, id=23832, stack(0x0000008a05e00000,0x0000008a05f00000)]
+  0x00000262cfcf5800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#16-1" [_thread_blocked, id=9192, stack(0x0000008a05d00000,0x0000008a05e00000)]
+  0x00000262cfcf0800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#19-1" [_thread_blocked, id=9196, stack(0x0000008a05c00000,0x0000008a05d00000)]
+  0x00000262cfcf1800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#18-1" [_thread_blocked, id=8340, stack(0x0000008a05b00000,0x0000008a05c00000)]
+  0x00000262cfcf7800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#108-1" [_thread_blocked, id=15572, stack(0x0000008a05a00000,0x0000008a05b00000)]
+  0x00000262cfcf4800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#109-1" [_thread_blocked, id=19340, stack(0x0000008a05900000,0x0000008a05a00000)]
+  0x00000262cfcf7000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#104-1" [_thread_blocked, id=3404, stack(0x0000008a05800000,0x0000008a05900000)]
+  0x00000262d3d5a000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#105-1" [_thread_blocked, id=1464, stack(0x0000008a05700000,0x0000008a05800000)]
+  0x00000262d3d58800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#106-1" [_thread_blocked, id=360, stack(0x0000008a05600000,0x0000008a05700000)]
+  0x00000262d3d57800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#107-1" [_thread_blocked, id=9868, stack(0x0000008a05500000,0x0000008a05600000)]
+  0x00000262d3d57000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#20-1" [_thread_blocked, id=2612, stack(0x0000008a05400000,0x0000008a05500000)]
+  0x00000262d3d59800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#22-1" [_thread_blocked, id=22880, stack(0x0000008a05300000,0x0000008a05400000)]
+  0x00000262d3d54000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#21-1" [_thread_blocked, id=19568, stack(0x0000008a05200000,0x0000008a05300000)]
+  0x00000262d3d52000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#24-1" [_thread_blocked, id=9928, stack(0x0000008a05100000,0x0000008a05200000)]
+  0x00000262d3d4f000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#23-1" [_thread_blocked, id=15772, stack(0x0000008a05000000,0x0000008a05100000)]
+  0x00000262d3d51800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#177-1" [_thread_blocked, id=5340, stack(0x0000008a04f00000,0x0000008a05000000)]
+  0x00000262d3d56000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#26-1" [_thread_blocked, id=17380, stack(0x0000008a04e00000,0x0000008a04f00000)]
+  0x00000262d3d53000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#25-1" [_thread_blocked, id=13824, stack(0x0000008a04d00000,0x0000008a04e00000)]
+  0x00000262d3d4e800 JavaThread "pool-2-thread-18" [_thread_blocked, id=276, stack(0x0000008a04c00000,0x0000008a04d00000)]
+  0x00000262d3d54800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#28-1" [_thread_blocked, id=16188, stack(0x0000008a04b00000,0x0000008a04c00000)]
+  0x00000262d3d55800 JavaThread "pool-2-thread-17" [_thread_blocked, id=22700, stack(0x0000008a04a00000,0x0000008a04b00000)]
+  0x00000262d3d4b000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#27-1" [_thread_blocked, id=14616, stack(0x0000008a04900000,0x0000008a04a00000)]
+  0x00000262d3d50800 JavaThread "pool-2-thread-16" [_thread_blocked, id=13200, stack(0x0000008a04800000,0x0000008a04900000)]
+  0x00000262d3d4c000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#173-1" [_thread_blocked, id=15936, stack(0x0000008a04700000,0x0000008a04800000)]
+  0x00000262d3d50000 JavaThread "pool-2-thread-15" [_thread_blocked, id=3792, stack(0x0000008a04600000,0x0000008a04700000)]
+  0x00000262d3d4d800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#174-1" [_thread_blocked, id=11804, stack(0x0000008a04500000,0x0000008a04600000)]
+  0x00000262d3d4c800 JavaThread "pool-2-thread-14" [_thread_blocked, id=3864, stack(0x0000008a04400000,0x0000008a04500000)]
+  0x00000262d75cb800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#29-1" [_thread_blocked, id=9596, stack(0x0000008a04300000,0x0000008a04400000)]
+  0x00000262d75cb000 JavaThread "pool-2-thread-13" [_thread_blocked, id=4008, stack(0x0000008a04200000,0x0000008a04300000)]
+  0x00000262d75cd000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#175-1" [_thread_blocked, id=16200, stack(0x0000008a04100000,0x0000008a04200000)]
+  0x00000262d75ca000 JavaThread "pool-2-thread-12" [_thread_blocked, id=23652, stack(0x0000008a04000000,0x0000008a04100000)]
+  0x00000262d75cc800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#176-1" [_thread_blocked, id=5332, stack(0x0000008a03f00000,0x0000008a04000000)]
+  0x00000262d75c2000 JavaThread "pool-2-thread-11" [_thread_blocked, id=24708, stack(0x0000008a03e00000,0x0000008a03f00000)]
+  0x00000262d75c9800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#170-1" [_thread_blocked, id=24616, stack(0x0000008a03d00000,0x0000008a03e00000)]
+  0x00000262d75c8800 JavaThread "pool-2-thread-10" [_thread_blocked, id=18968, stack(0x0000008a03c00000,0x0000008a03d00000)]
+  0x00000262d75c7800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#171-1" [_thread_blocked, id=21800, stack(0x0000008a03b00000,0x0000008a03c00000)]
+  0x00000262d75c3000 JavaThread "pool-2-thread-9" [_thread_blocked, id=11088, stack(0x0000008a03a00000,0x0000008a03b00000)]
+  0x00000262d75c0000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#31-1" [_thread_blocked, id=24144, stack(0x0000008a03900000,0x0000008a03a00000)]
+  0x00000262d75c7000 JavaThread "pool-2-thread-8" [_thread_blocked, id=1696, stack(0x0000008a03800000,0x0000008a03900000)]
+  0x00000262d75bf000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#172-1" [_thread_blocked, id=11324, stack(0x0000008a03700000,0x0000008a03800000)]
+  0x00000262d75c6000 JavaThread "pool-2-thread-7" [_thread_blocked, id=20940, stack(0x0000008a03600000,0x0000008a03700000)]
+  0x00000262d75be800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#30-1" [_thread_blocked, id=17436, stack(0x0000008a03500000,0x0000008a03600000)]
+  0x00000262d75c5800 JavaThread "pool-2-thread-6" [_thread_blocked, id=6268, stack(0x0000008a03400000,0x0000008a03500000)]
+  0x00000262d75c1800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#33-1" [_thread_blocked, id=2440, stack(0x0000008a03300000,0x0000008a03400000)]
+  0x00000262d75c4000 JavaThread "pool-2-thread-5" [_thread_blocked, id=4848, stack(0x0000008a03200000,0x0000008a03300000)]
+  0x00000262d75c4800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#32-1" [_thread_blocked, id=8496, stack(0x0000008a03100000,0x0000008a03200000)]
+  0x00000262d75c0800 JavaThread "pool-2-thread-4" [_thread_blocked, id=19244, stack(0x0000008a03000000,0x0000008a03100000)]
+  0x00000262d392c000 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#35-1" [_thread_blocked, id=2428, stack(0x0000008a02f00000,0x0000008a03000000)]
+  0x00000262d3932800 JavaThread "pool-2-thread-3" [_thread_blocked, id=9028, stack(0x0000008a02e00000,0x0000008a02f00000)]
+  0x00000262d3931800 JavaThread "org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#34-1" [_thread_blocked, id=6184, stack(0x0000008a02d00000,0x0000008a02e00000)]
+  0x00000262d3931000 JavaThread "pool-2-thread-2" [_thread_blocked, id=25428, stack(0x0000008a02c00000,0x0000008a02d00000)]
+  0x00000262d392d800 JavaThread "AMQP Connection 175.178.37.103:5672" [_thread_in_native, id=22488, stack(0x0000008a02b00000,0x0000008a02c00000)]
+  0x00000262d392f800 JavaThread "quartzScheduler_QuartzSchedulerThread" [_thread_blocked, id=24092, stack(0x0000008a02900000,0x0000008a02a00000)]
+  0x00000262d392d000 JavaThread "quartzScheduler_Worker-10" [_thread_blocked, id=15680, stack(0x0000008a02800000,0x0000008a02900000)]
+  0x00000262d392e800 JavaThread "quartzScheduler_Worker-9" [_thread_blocked, id=800, stack(0x0000008a02700000,0x0000008a02800000)]
+  0x00000262d3930000 JavaThread "quartzScheduler_Worker-8" [_thread_blocked, id=25100, stack(0x0000008a02600000,0x0000008a02700000)]
+  0x00000262d3924800 JavaThread "quartzScheduler_Worker-7" [_thread_blocked, id=10252, stack(0x0000008a02500000,0x0000008a02600000)]
+  0x00000262d392b800 JavaThread "quartzScheduler_Worker-6" [_thread_blocked, id=20020, stack(0x0000008a02400000,0x0000008a02500000)]
+  0x00000262d392a800 JavaThread "quartzScheduler_Worker-5" [_thread_blocked, id=20176, stack(0x0000008a02300000,0x0000008a02400000)]
+  0x00000262d392a000 JavaThread "quartzScheduler_Worker-4" [_thread_blocked, id=17800, stack(0x0000008a02200000,0x0000008a02300000)]
+  0x00000262d3923800 JavaThread "quartzScheduler_Worker-3" [_thread_blocked, id=7112, stack(0x0000008a02100000,0x0000008a02200000)]
+  0x00000262d3927800 JavaThread "quartzScheduler_Worker-2" [_thread_blocked, id=19972, stack(0x0000008a02000000,0x0000008a02100000)]
+  0x00000262d3929000 JavaThread "quartzScheduler_Worker-1" [_thread_blocked, id=20720, stack(0x0000008a01f00000,0x0000008a02000000)]
+  0x00000262d3926000 JavaThread "lettuce-timer-3-1" daemon [_thread_blocked, id=25252, stack(0x0000008a01e00000,0x0000008a01f00000)]
+  0x00000262d3925000 JavaThread "DefaultQuartzScheduler_QuartzSchedulerThread" [_thread_blocked, id=24408, stack(0x0000008a01d00000,0x0000008a01e00000)]
+  0x00000262d5f27800 JavaThread "DefaultQuartzScheduler_Worker-10" [_thread_blocked, id=20060, stack(0x0000008a01c00000,0x0000008a01d00000)]
+  0x00000262d5f27000 JavaThread "DefaultQuartzScheduler_Worker-9" [_thread_blocked, id=18616, stack(0x0000008a01b00000,0x0000008a01c00000)]
+  0x00000262d5f2d000 JavaThread "DefaultQuartzScheduler_Worker-8" [_thread_blocked, id=5768, stack(0x0000008a01a00000,0x0000008a01b00000)]
+  0x00000262d5f2c800 JavaThread "DefaultQuartzScheduler_Worker-7" [_thread_blocked, id=1280, stack(0x0000008a01900000,0x0000008a01a00000)]
+  0x00000262d5f2b800 JavaThread "DefaultQuartzScheduler_Worker-6" [_thread_blocked, id=16324, stack(0x0000008a01800000,0x0000008a01900000)]
+  0x00000262d5f28800 JavaThread "DefaultQuartzScheduler_Worker-5" [_thread_blocked, id=22208, stack(0x0000008a01700000,0x0000008a01800000)]
+  0x00000262d5f29000 JavaThread "DefaultQuartzScheduler_Worker-4" [_thread_blocked, id=23692, stack(0x0000008a01600000,0x0000008a01700000)]
+  0x00000262d5f26000 JavaThread "DefaultQuartzScheduler_Worker-3" [_thread_blocked, id=21636, stack(0x0000008a01500000,0x0000008a01600000)]
+  0x00000262d5f2b000 JavaThread "DefaultQuartzScheduler_Worker-2" [_thread_blocked, id=23320, stack(0x0000008a01400000,0x0000008a01500000)]
+  0x00000262d5f2a000 JavaThread "DefaultQuartzScheduler_Worker-1" [_thread_blocked, id=23268, stack(0x0000008a01300000,0x0000008a01400000)]
+  0x00000262d393d800 JavaThread "mysql-cj-abandoned-connection-cleanup" daemon [_thread_blocked, id=10580, stack(0x0000008a01200000,0x0000008a01300000)]
+  0x00000262cfa93000 JavaThread "I/O dispatcher 8" [_thread_in_native, id=7164, stack(0x0000008a01100000,0x0000008a01200000)]
+  0x00000262cfa92800 JavaThread "I/O dispatcher 7" [_thread_in_native, id=22508, stack(0x0000008a01000000,0x0000008a01100000)]
+  0x00000262cfe49000 JavaThread "I/O dispatcher 6" [_thread_in_native, id=22804, stack(0x0000008a00f00000,0x0000008a01000000)]
+  0x00000262cfe48800 JavaThread "I/O dispatcher 5" [_thread_in_native, id=15040, stack(0x0000008a00e00000,0x0000008a00f00000)]
+  0x00000262d1ba2000 JavaThread "I/O dispatcher 4" [_thread_in_native, id=924, stack(0x0000008a00d00000,0x0000008a00e00000)]
+  0x00000262d1ba1800 JavaThread "I/O dispatcher 3" [_thread_in_native, id=17428, stack(0x0000008a00c00000,0x0000008a00d00000)]
+  0x00000262d0bd3000 JavaThread "I/O dispatcher 2" [_thread_in_native, id=10944, stack(0x0000008a00b00000,0x0000008a00c00000)]
+  0x00000262d36dc800 JavaThread "I/O dispatcher 1" [_thread_in_native, id=16976, stack(0x0000008a00a00000,0x0000008a00b00000)]
+  0x00000262d3fbb800 JavaThread "pool-1-thread-1" [_thread_in_native, id=17032, stack(0x0000008a00900000,0x0000008a00a00000)]
+  0x00000262cda29000 JavaThread "Service Thread" daemon [_thread_blocked, id=12608, stack(0x0000008a00700000,0x0000008a00800000)]
+  0x00000262cf667800 JavaThread "C1 CompilerThread3" daemon [_thread_blocked, id=21652, stack(0x0000008a00600000,0x0000008a00700000)]
+  0x00000262cf659000 JavaThread "C2 CompilerThread2" daemon [_thread_in_native, id=7620, stack(0x0000008a00500000,0x0000008a00600000)]
+=>0x00000262cf655000 JavaThread "C2 CompilerThread1" daemon [_thread_in_native, id=24480, stack(0x0000008a00400000,0x0000008a00500000)]
+  0x00000262cf653800 JavaThread "C2 CompilerThread0" daemon [_thread_in_native, id=24992, stack(0x0000008a00300000,0x0000008a00400000)]
+  0x00000262cf64d000 JavaThread "Monitor Ctrl-Break" daemon [_thread_in_native, id=20124, stack(0x0000008a00200000,0x0000008a00300000)]
+  0x00000262cf613800 JavaThread "Attach Listener" daemon [_thread_blocked, id=7948, stack(0x0000008a00100000,0x0000008a00200000)]
+  0x00000262cd9f5000 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=21888, stack(0x0000008a00000000,0x0000008a00100000)]
+  0x00000262cd9c6000 JavaThread "Finalizer" daemon [_thread_blocked, id=11376, stack(0x0000008a7ff00000,0x0000008a80000000)]
+  0x00000262cd644800 JavaThread "Reference Handler" daemon [_thread_blocked, id=10284, stack(0x0000008a7fe00000,0x0000008a7ff00000)]
+  0x00000262b27aa800 JavaThread "main" [_thread_in_vm, id=5908, stack(0x0000008a7f400000,0x0000008a7f500000)]
+
+Other Threads:
+  0x00000262cd9a0800 VMThread [stack: 0x0000008a7fd00000,0x0000008a7fe00000] [id=21292]
+  0x00000262cf714000 WatcherThread [stack: 0x0000008a00800000,0x0000008a00900000] [id=16548]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+heap address: 0x00000006c2a00000, size: 4054 MB, Compressed Oops mode: Zero based, Oop shift amount: 3
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 3
+Compressed class space size: 1073741824 Address: 0x00000007c0000000
+
+Heap:
+ PSYoungGen      total 236032K, used 195019K [0x000000076b900000, 0x000000077ba80000, 0x00000007c0000000)
+  eden space 227840K, 82% used [0x000000076b900000,0x0000000776f87780,0x0000000779780000)
+  from space 8192K, 98% used [0x000000077b280000,0x000000077ba6b4e0,0x000000077ba80000)
+  to   space 17408K, 0% used [0x0000000779880000,0x0000000779880000,0x000000077a980000)
+ ParOldGen       total 259584K, used 30384K [0x00000006c2a00000, 0x00000006d2780000, 0x000000076b900000)
+  object space 259584K, 11% used [0x00000006c2a00000,0x00000006c47ac3c0,0x00000006d2780000)
+ Metaspace       used 61835K, capacity 66420K, committed 66728K, reserved 1107968K
+  class space    used 7986K, capacity 8844K, committed 8872K, reserved 1048576K
+
+Card table byte_map: [0x00000262c3970000,0x00000262c4160000] byte_map_base: 0x00000262c035b000
+
+Marking Bits: (ParMarkBitMap*) 0x0000000070b61860
+ Begin Bits: [0x00000262c46b0000, 0x00000262c8608000)
+ End Bits:   [0x00000262c8608000, 0x00000262cc560000)
+
+Polling page: 0x00000262b2960000
+
+CodeCache: size=245760Kb used=20949Kb max_used=20962Kb free=224810Kb
+ bounds [0x00000262b45b0000, 0x00000262b5a40000, 0x00000262c35b0000]
+ total_blobs=5944 nmethods=5383 adapters=473
+ compilation: enabled
+
+Compilation events (10 events):
+Event: 22.491 Thread 0x00000262cf667800 6056       3       java.util.concurrent.ConcurrentLinkedQueue::poll (85 bytes)
+Event: 22.491 Thread 0x00000262cf667800 nmethod 6056 0x00000262b5a31150 code [0x00000262b5a31320, 0x00000262b5a31cf8]
+Event: 22.491 Thread 0x00000262cf667800 6057       3       java.lang.Enum::compareTo (44 bytes)
+Event: 22.492 Thread 0x00000262cf667800 nmethod 6057 0x00000262b5a30450 code [0x00000262b5a30600, 0x00000262b5a30f10]
+Event: 22.502 Thread 0x00000262cf653800 nmethod 6038 0x00000262b5a37d10 code [0x00000262b5a37ee0, 0x00000262b5a38d08]
+Event: 22.502 Thread 0x00000262cf653800 6047       4       java.lang.Integer::compareTo (9 bytes)
+Event: 22.503 Thread 0x00000262cf653800 nmethod 6047 0x00000262b5a34d90 code [0x00000262b5a34ee0, 0x00000262b5a34f98]
+Event: 22.503 Thread 0x00000262cf653800 6039       4       java.util.Arrays::copyOf (13 bytes)
+Event: 22.504 Thread 0x00000262cf653800 nmethod 6039 0x00000262b5a349d0 code [0x00000262b5a34b00, 0x00000262b5a34c98]
+Event: 22.504 Thread 0x00000262cf653800 6058       4       java.security.SecureClassLoader::defineClass (16 bytes)
+
+GC Heap History (10 events):
+Event: 5.327 GC heap before
+{Heap before GC invocations=9 (full 2):
+ PSYoungGen      total 152064K, used 142336K [0x000000076b900000, 0x0000000778880000, 0x00000007c0000000)
+  eden space 142336K, 100% used [0x000000076b900000,0x0000000774400000,0x0000000774400000)
+  from space 9728K, 0% used [0x0000000774f80000,0x0000000774f80000,0x0000000775900000)
+  to   space 11776K, 0% used [0x0000000774400000,0x0000000774400000,0x0000000774f80000)
+ ParOldGen       total 179712K, used 17017K [0x00000006c2a00000, 0x00000006cd980000, 0x000000076b900000)
+  object space 179712K, 9% used [0x00000006c2a00000,0x00000006c3a9e650,0x00000006cd980000)
+ Metaspace       used 41489K, capacity 44202K, committed 44328K, reserved 1087488K
+  class space    used 5493K, capacity 6071K, committed 6184K, reserved 1048576K
+Event: 5.336 GC heap after
+Heap after GC invocations=9 (full 2):
+ PSYoungGen      total 154112K, used 11082K [0x000000076b900000, 0x0000000778e80000, 0x00000007c0000000)
+  eden space 142336K, 0% used [0x000000076b900000,0x000000076b900000,0x0000000774400000)
+  from space 11776K, 94% used [0x0000000774400000,0x0000000774ed2938,0x0000000774f80000)
+  to   space 12288K, 0% used [0x0000000778280000,0x0000000778280000,0x0000000778e80000)
+ ParOldGen       total 179712K, used 17025K [0x00000006c2a00000, 0x00000006cd980000, 0x000000076b900000)
+  object space 179712K, 9% used [0x00000006c2a00000,0x00000006c3aa0650,0x00000006cd980000)
+ Metaspace       used 41489K, capacity 44202K, committed 44328K, reserved 1087488K
+  class space    used 5493K, capacity 6071K, committed 6184K, reserved 1048576K
+}
+Event: 6.569 GC heap before
+{Heap before GC invocations=10 (full 2):
+ PSYoungGen      total 154112K, used 153418K [0x000000076b900000, 0x0000000778e80000, 0x00000007c0000000)
+  eden space 142336K, 100% used [0x000000076b900000,0x0000000774400000,0x0000000774400000)
+  from space 11776K, 94% used [0x0000000774400000,0x0000000774ed2938,0x0000000774f80000)
+  to   space 12288K, 0% used [0x0000000778280000,0x0000000778280000,0x0000000778e80000)
+ ParOldGen       total 179712K, used 17025K [0x00000006c2a00000, 0x00000006cd980000, 0x000000076b900000)
+  object space 179712K, 9% used [0x00000006c2a00000,0x00000006c3aa0650,0x00000006cd980000)
+ Metaspace       used 49637K, capacity 52782K, committed 53032K, reserved 1095680K
+  class space    used 6532K, capacity 7187K, committed 7208K, reserved 1048576K
+Event: 6.581 GC heap after
+Heap after GC invocations=10 (full 2):
+ PSYoungGen      total 204288K, used 12259K [0x000000076b900000, 0x0000000779280000, 0x00000007c0000000)
+  eden space 192000K, 0% used [0x000000076b900000,0x000000076b900000,0x0000000777480000)
+  from space 12288K, 99% used [0x0000000778280000,0x0000000778e78ec8,0x0000000778e80000)
+  to   space 14336K, 0% used [0x0000000777480000,0x0000000777480000,0x0000000778280000)
+ ParOldGen       total 179712K, used 18892K [0x00000006c2a00000, 0x00000006cd980000, 0x000000076b900000)
+  object space 179712K, 10% used [0x00000006c2a00000,0x00000006c3c730a0,0x00000006cd980000)
+ Metaspace       used 49637K, capacity 52782K, committed 53032K, reserved 1095680K
+  class space    used 6532K, capacity 7187K, committed 7208K, reserved 1048576K
+}
+Event: 7.359 GC heap before
+{Heap before GC invocations=11 (full 2):
+ PSYoungGen      total 204288K, used 122093K [0x000000076b900000, 0x0000000779280000, 0x00000007c0000000)
+  eden space 192000K, 57% used [0x000000076b900000,0x0000000772442780,0x0000000777480000)
+  from space 12288K, 99% used [0x0000000778280000,0x0000000778e78ec8,0x0000000778e80000)
+  to   space 14336K, 0% used [0x0000000777480000,0x0000000777480000,0x0000000778280000)
+ ParOldGen       total 179712K, used 18892K [0x00000006c2a00000, 0x00000006cd980000, 0x000000076b900000)
+  object space 179712K, 10% used [0x00000006c2a00000,0x00000006c3c730a0,0x00000006cd980000)
+ Metaspace       used 55618K, capacity 59056K, committed 59160K, reserved 1101824K
+  class space    used 7114K, capacity 7806K, committed 7848K, reserved 1048576K
+Event: 7.371 GC heap after
+Heap after GC invocations=11 (full 2):
+ PSYoungGen      total 206336K, used 14328K [0x000000076b900000, 0x000000077c400000, 0x00000007c0000000)
+  eden space 192000K, 0% used [0x000000076b900000,0x000000076b900000,0x0000000777480000)
+  from space 14336K, 99% used [0x0000000777480000,0x000000077827e060,0x0000000778280000)
+  to   space 17920K, 0% used [0x000000077b280000,0x000000077b280000,0x000000077c400000)
+ ParOldGen       total 179712K, used 23311K [0x00000006c2a00000, 0x00000006cd980000, 0x000000076b900000)
+  object space 179712K, 12% used [0x00000006c2a00000,0x00000006c40c3d00,0x00000006cd980000)
+ Metaspace       used 55618K, capacity 59056K, committed 59160K, reserved 1101824K
+  class space    used 7114K, capacity 7806K, committed 7848K, reserved 1048576K
+}
+Event: 7.371 GC heap before
+{Heap before GC invocations=12 (full 3):
+ PSYoungGen      total 206336K, used 14328K [0x000000076b900000, 0x000000077c400000, 0x00000007c0000000)
+  eden space 192000K, 0% used [0x000000076b900000,0x000000076b900000,0x0000000777480000)
+  from space 14336K, 99% used [0x0000000777480000,0x000000077827e060,0x0000000778280000)
+  to   space 17920K, 0% used [0x000000077b280000,0x000000077b280000,0x000000077c400000)
+ ParOldGen       total 179712K, used 23311K [0x00000006c2a00000, 0x00000006cd980000, 0x000000076b900000)
+  object space 179712K, 12% used [0x00000006c2a00000,0x00000006c40c3d00,0x00000006cd980000)
+ Metaspace       used 55618K, capacity 59056K, committed 59160K, reserved 1101824K
+  class space    used 7114K, capacity 7806K, committed 7848K, reserved 1048576K
+Event: 7.490 GC heap after
+Heap after GC invocations=12 (full 3):
+ PSYoungGen      total 206336K, used 0K [0x000000076b900000, 0x000000077c400000, 0x00000007c0000000)
+  eden space 192000K, 0% used [0x000000076b900000,0x000000076b900000,0x0000000777480000)
+  from space 14336K, 0% used [0x0000000777480000,0x0000000777480000,0x0000000778280000)
+  to   space 17920K, 0% used [0x000000077b280000,0x000000077b280000,0x000000077c400000)
+ ParOldGen       total 259584K, used 30376K [0x00000006c2a00000, 0x00000006d2780000, 0x000000076b900000)
+  object space 259584K, 11% used [0x00000006c2a00000,0x00000006c47aa3c0,0x00000006d2780000)
+ Metaspace       used 55618K, capacity 59056K, committed 59160K, reserved 1101824K
+  class space    used 7114K, capacity 7806K, committed 7848K, reserved 1048576K
+}
+Event: 8.528 GC heap before
+{Heap before GC invocations=13 (full 3):
+ PSYoungGen      total 206336K, used 192000K [0x000000076b900000, 0x000000077c400000, 0x00000007c0000000)
+  eden space 192000K, 100% used [0x000000076b900000,0x0000000777480000,0x0000000777480000)
+  from space 14336K, 0% used [0x0000000777480000,0x0000000777480000,0x0000000778280000)
+  to   space 17920K, 0% used [0x000000077b280000,0x000000077b280000,0x000000077c400000)
+ ParOldGen       total 259584K, used 30376K [0x00000006c2a00000, 0x00000006d2780000, 0x000000076b900000)
+  object space 259584K, 11% used [0x00000006c2a00000,0x00000006c47aa3c0,0x00000006d2780000)
+ Metaspace       used 58751K, capacity 62986K, committed 63272K, reserved 1103872K
+  class space    used 7607K, capacity 8415K, committed 8488K, reserved 1048576K
+Event: 8.535 GC heap after
+Heap after GC invocations=13 (full 3):
+ PSYoungGen      total 236032K, used 8109K [0x000000076b900000, 0x000000077ba80000, 0x00000007c0000000)
+  eden space 227840K, 0% used [0x000000076b900000,0x000000076b900000,0x0000000779780000)
+  from space 8192K, 98% used [0x000000077b280000,0x000000077ba6b4e0,0x000000077ba80000)
+  to   space 17408K, 0% used [0x0000000779880000,0x0000000779880000,0x000000077a980000)
+ ParOldGen       total 259584K, used 30384K [0x00000006c2a00000, 0x00000006d2780000, 0x000000076b900000)
+  object space 259584K, 11% used [0x00000006c2a00000,0x00000006c47ac3c0,0x00000006d2780000)
+ Metaspace       used 58751K, capacity 62986K, committed 63272K, reserved 1103872K
+  class space    used 7607K, capacity 8415K, committed 8488K, reserved 1048576K
+}
+
+Deoptimization events (10 events):
+Event: 9.082 Thread 0x00000262b27aa800 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00000262b4a594a8 method=java.io.DataOutputStream.writeByte(I)V @ 5
+Event: 9.082 Thread 0x00000262b27aa800 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00000262b4a0ca04 method=java.io.DataOutputStream.writeShort(I)V @ 12
+Event: 9.096 Thread 0x00000262b27aa800 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00000262b4a594a8 method=java.io.DataOutputStream.writeByte(I)V @ 5
+Event: 9.096 Thread 0x00000262b27aa800 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00000262b4a0ca04 method=java.io.DataOutputStream.writeShort(I)V @ 12
+Event: 9.096 Thread 0x00000262b27aa800 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00000262b4a594a8 method=java.io.DataOutputStream.writeByte(I)V @ 5
+Event: 9.096 Thread 0x00000262b27aa800 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00000262b4a0ca04 method=java.io.DataOutputStream.writeShort(I)V @ 12
+Event: 9.129 Thread 0x00000262b27aa800 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00000262b4a594a8 method=java.io.DataOutputStream.writeByte(I)V @ 5
+Event: 9.129 Thread 0x00000262b27aa800 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00000262b4a0ca04 method=java.io.DataOutputStream.writeShort(I)V @ 12
+Event: 9.539 Thread 0x00000262d393d800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00000262b483eb0c method=java.util.zip.ZipCoder.getBytes(Ljava/lang/String;)[B @ 32
+Event: 22.454 Thread 0x00000262b27aa800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00000262b4ad5e98 method=org.springframework.util.ConcurrentReferenceHashMap$Segment.clear()V @ 7
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (10 events):
+Event: 8.887 Thread 0x00000262b27aa800 Exception <a 'java/lang/ClassNotFoundException': org/springframework/beans/factory/AwareCustomizer> (0x000000076f80afb8) thrown at [C:\wsjdk\Corretto8Src\installers\windows\zip\corretto-build\buildRoot\src\hotspot\src\share\vm\classfile\systemDictionary.c
+Event: 8.887 Thread 0x00000262b27aa800 Exception <a 'java/lang/ClassNotFoundException': org/springframework/core/env/EnvironmentCapableCustomizer> (0x000000076f839010) thrown at [C:\wsjdk\Corretto8Src\installers\windows\zip\corretto-build\buildRoot\src\hotspot\src\share\vm\classfile\systemDict
+Event: 8.887 Thread 0x00000262b27aa800 Exception <a 'java/lang/ClassNotFoundException': org/springframework/web/context/ServletContextAwareCustomizer> (0x000000076f86b510) thrown at [C:\wsjdk\Corretto8Src\installers\windows\zip\corretto-build\buildRoot\src\hotspot\src\share\vm\classfile\system
+Event: 8.888 Thread 0x00000262b27aa800 Exception <a 'java/lang/ClassNotFoundException': org/springframework/beans/factory/AwareCustomizer> (0x000000076f895f70) thrown at [C:\wsjdk\Corretto8Src\installers\windows\zip\corretto-build\buildRoot\src\hotspot\src\share\vm\classfile\systemDictionary.c
+Event: 8.888 Thread 0x00000262b27aa800 Exception <a 'java/lang/ClassNotFoundException': org/springframework/beans/factory/InitializingBeanCustomizer> (0x000000076f8c6510) thrown at [C:\wsjdk\Corretto8Src\installers\windows\zip\corretto-build\buildRoot\src\hotspot\src\share\vm\classfile\systemD
+Event: 8.889 Thread 0x00000262b27aa800 Exception <a 'java/lang/ClassNotFoundException': org/springframework/beans/factory/DisposableBeanCustomizer> (0x000000076f8f4f40) thrown at [C:\wsjdk\Corretto8Src\installers\windows\zip\corretto-build\buildRoot\src\hotspot\src\share\vm\classfile\systemDic
+Event: 8.892 Thread 0x00000262b27aa800 Exception <a 'java/lang/ClassNotFoundException': java/lang/ObjectCustomizer> (0x000000076f95f1a0) thrown at [C:\wsjdk\Corretto8Src\installers\windows\zip\corretto-build\buildRoot\src\hotspot\src\share\vm\classfile\systemDictionary.cpp, line 217]
+Event: 8.893 Thread 0x00000262b27aa800 Exception <a 'java/lang/ClassNotFoundException': org/springframework/web/multipart/support/StandardServletMultipartResolverCustomizer> (0x000000076f9a0c88) thrown at [C:\wsjdk\Corretto8Src\installers\windows\zip\corretto-build\buildRoot\src\hotspot\src\sh
+Event: 8.894 Thread 0x00000262b27aa800 Exception <a 'java/lang/ClassNotFoundException': org/springframework/web/multipart/MultipartResolverCustomizer> (0x000000076f9d85c0) thrown at [C:\wsjdk\Corretto8Src\installers\windows\zip\corretto-build\buildRoot\src\hotspot\src\share\vm\classfile\system
+Event: 8.919 Thread 0x00000262b27aa800 Exception <a 'java/lang/IncompatibleClassChangeError': Found class java.lang.Object, but interface was expected> (0x000000076fcd2350) thrown at [C:\wsjdk\Corretto8Src\installers\windows\zip\corretto-build\buildRoot\src\hotspot\src\share\vm\interpreter\lin
+
+Events (10 events):
+Event: 22.504 loading class javax/servlet/LocalStrings_zh_Hans
+Event: 22.504 loading class javax/servlet/LocalStrings_zh_Hans done
+Event: 22.505 loading class javax/servlet/LocalStrings_zh_Hans_CN
+Event: 22.505 loading class javax/servlet/LocalStrings_zh_Hans_CN done
+Event: 22.505 loading class org/springframework/web/context/request/ServletWebRequest
+Event: 22.505 loading class org/springframework/web/context/request/ServletWebRequest done
+Event: 22.507 loading class org/springframework/core/NamedInheritableThreadLocal
+Event: 22.507 loading class org/springframework/core/NamedInheritableThreadLocal done
+Event: 22.508 loading class javax/faces/context/FacesContext
+Event: 22.508 loading class javax/faces/context/FacesContext done
+
+
+Dynamic libraries:
+0x00007ff748540000 - 0x00007ff74857a000 	C:\Users\其然乐衣Letitbe\.jdks\corretto-1.8.0_312\bin\java.exe
+0x00007ffc769d0000 - 0x00007ffc76bc8000 	C:\WINDOWS\SYSTEM32\ntdll.dll
+0x00007ffc75f30000 - 0x00007ffc75fef000 	C:\WINDOWS\System32\KERNEL32.DLL
+0x00007ffc740c0000 - 0x00007ffc74392000 	C:\WINDOWS\System32\KERNELBASE.dll
+0x00007ffc76870000 - 0x00007ffc7691e000 	C:\WINDOWS\System32\ADVAPI32.dll
+0x00007ffc75170000 - 0x00007ffc7520e000 	C:\WINDOWS\System32\msvcrt.dll
+0x00007ffc76080000 - 0x00007ffc7611c000 	C:\WINDOWS\System32\sechost.dll
+0x00007ffc75e00000 - 0x00007ffc75f25000 	C:\WINDOWS\System32\RPCRT4.dll
+0x00007ffc757a0000 - 0x00007ffc75941000 	C:\WINDOWS\System32\USER32.dll
+0x00007ffc74430000 - 0x00007ffc74452000 	C:\WINDOWS\System32\win32u.dll
+0x00007ffc75630000 - 0x00007ffc7565b000 	C:\WINDOWS\System32\GDI32.dll
+0x00007ffc74770000 - 0x00007ffc7487f000 	C:\WINDOWS\System32\gdi32full.dll
+0x00007ffc748d0000 - 0x00007ffc7496d000 	C:\WINDOWS\System32\msvcp_win.dll
+0x00007ffc74510000 - 0x00007ffc74610000 	C:\WINDOWS\System32\ucrtbase.dll
+0x00007ffc618b0000 - 0x00007ffc61b4a000 	C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.19041.1110_none_60b5254171f9507e\COMCTL32.dll
+0x00007ffc75130000 - 0x00007ffc75162000 	C:\WINDOWS\System32\IMM32.DLL
+0x00007ffc5c440000 - 0x00007ffc5c52f000 	C:\Users\其然乐衣Letitbe\.jdks\corretto-1.8.0_312\jre\bin\msvcr120.dll
+0x00007ffc5b940000 - 0x00007ffc5b9e6000 	C:\Users\其然乐衣Letitbe\.jdks\corretto-1.8.0_312\jre\bin\msvcp120.dll
+0x0000000070370000 - 0x0000000070be0000 	C:\Users\其然乐衣Letitbe\.jdks\corretto-1.8.0_312\jre\bin\server\jvm.dll
+0x00007ffc76920000 - 0x00007ffc76928000 	C:\WINDOWS\System32\PSAPI.DLL
+0x00007ffc713c0000 - 0x00007ffc713e7000 	C:\WINDOWS\SYSTEM32\WINMM.dll
+0x00007ffc6bf30000 - 0x00007ffc6bf3a000 	C:\WINDOWS\SYSTEM32\VERSION.dll
+0x00007ffc4aec0000 - 0x00007ffc4aec9000 	C:\WINDOWS\SYSTEM32\WSOCK32.dll
+0x00007ffc752d0000 - 0x00007ffc7533b000 	C:\WINDOWS\System32\WS2_32.dll
+0x00007ffc6dd20000 - 0x00007ffc6dd2f000 	C:\Users\其然乐衣Letitbe\.jdks\corretto-1.8.0_312\jre\bin\verify.dll
+0x00007ffc5b910000 - 0x00007ffc5b939000 	C:\Users\其然乐衣Letitbe\.jdks\corretto-1.8.0_312\jre\bin\java.dll
+0x00007ffc5b180000 - 0x00007ffc5b1aa000 	C:\Users\其然乐衣Letitbe\.jdks\corretto-1.8.0_312\jre\bin\instrument.dll
+0x00007ffc5b8f0000 - 0x00007ffc5b906000 	C:\Users\其然乐衣Letitbe\.jdks\corretto-1.8.0_312\jre\bin\zip.dll
+0x00007ffc76120000 - 0x00007ffc76864000 	C:\WINDOWS\System32\SHELL32.dll
+0x00007ffc71dc0000 - 0x00007ffc72552000 	C:\WINDOWS\SYSTEM32\windows.storage.dll
+0x00007ffc759d0000 - 0x00007ffc75d25000 	C:\WINDOWS\System32\combase.dll
+0x00007ffc73b20000 - 0x00007ffc73b50000 	C:\WINDOWS\SYSTEM32\Wldp.dll
+0x00007ffc753a0000 - 0x00007ffc7544d000 	C:\WINDOWS\System32\SHCORE.dll
+0x00007ffc75210000 - 0x00007ffc75265000 	C:\WINDOWS\System32\shlwapi.dll
+0x00007ffc74000000 - 0x00007ffc7401f000 	C:\WINDOWS\SYSTEM32\profapi.dll
+0x00007ffc5b160000 - 0x00007ffc5b17a000 	D:\Program Files\JetBrains\IntelliJ IDEA 2021.3.3\bin\breakgen64.dll
+0x00007ffc5b8d0000 - 0x00007ffc5b8ea000 	C:\Users\其然乐衣Letitbe\.jdks\corretto-1.8.0_312\jre\bin\net.dll
+0x00007ffc73880000 - 0x00007ffc738ea000 	C:\WINDOWS\system32\mswsock.dll
+0x00007ffc5b8b0000 - 0x00007ffc5b8c2000 	C:\Users\其然乐衣Letitbe\.jdks\corretto-1.8.0_312\jre\bin\nio.dll
+0x00007ffc5c900000 - 0x00007ffc5c90d000 	C:\Users\其然乐衣Letitbe\.jdks\corretto-1.8.0_312\jre\bin\management.dll
+0x00007ffc3a040000 - 0x00007ffc3a057000 	C:\WINDOWS\system32\napinsp.dll
+0x00007ffc3a020000 - 0x00007ffc3a03b000 	C:\WINDOWS\system32\pnrpnsp.dll
+0x00007ffc6d570000 - 0x00007ffc6d585000 	C:\WINDOWS\system32\wshbth.dll
+0x00007ffc6d6e0000 - 0x00007ffc6d6fd000 	C:\WINDOWS\system32\NLAapi.dll
+0x00007ffc73520000 - 0x00007ffc7355b000 	C:\WINDOWS\SYSTEM32\IPHLPAPI.DLL
+0x00007ffc73560000 - 0x00007ffc7362a000 	C:\WINDOWS\SYSTEM32\DNSAPI.dll
+0x00007ffc75660000 - 0x00007ffc75668000 	C:\WINDOWS\System32\NSI.dll
+0x00007ffc3a000000 - 0x00007ffc3a012000 	C:\WINDOWS\System32\winrnr.dll
+0x0000000070ff0000 - 0x0000000071016000 	C:\Program Files\Bonjour\mdnsNSP.dll
+0x00007ffc66510000 - 0x00007ffc6651a000 	C:\Windows\System32\rasadhlp.dll
+0x00007ffc66430000 - 0x00007ffc664b0000 	C:\WINDOWS\System32\fwpuclnt.dll
+0x00007ffc74970000 - 0x00007ffc74997000 	C:\WINDOWS\System32\bcrypt.dll
+0x00007ffc5b130000 - 0x00007ffc5b153000 	C:\Users\其然乐衣Letitbe\.jdks\corretto-1.8.0_312\jre\bin\sunec.dll
+0x00007ffc73a80000 - 0x00007ffc73a98000 	C:\WINDOWS\SYSTEM32\CRYPTSP.dll
+0x00007ffc73130000 - 0x00007ffc73164000 	C:\WINDOWS\system32\rsaenh.dll
+0x00007ffc73fc0000 - 0x00007ffc73fee000 	C:\WINDOWS\SYSTEM32\USERENV.dll
+0x00007ffc743a0000 - 0x00007ffc74422000 	C:\WINDOWS\System32\bcryptprimitives.dll
+0x00007ffc73a70000 - 0x00007ffc73a7c000 	C:\WINDOWS\SYSTEM32\CRYPTBASE.dll
+0x00007ffc69ef0000 - 0x00007ffc69f07000 	C:\WINDOWS\SYSTEM32\dhcpcsvc6.DLL
+0x00007ffc69ed0000 - 0x00007ffc69eed000 	C:\WINDOWS\SYSTEM32\dhcpcsvc.DLL
+0x00007ffc5cba0000 - 0x00007ffc5cbac000 	C:\Users\其然乐衣Letitbe\.jdks\corretto-1.8.0_312\jre\bin\sunmscapi.dll
+0x00007ffc74610000 - 0x00007ffc74766000 	C:\WINDOWS\System32\CRYPT32.dll
+0x00007ffc73b90000 - 0x00007ffc73bb7000 	C:\WINDOWS\SYSTEM32\ncrypt.dll
+0x00007ffc73b50000 - 0x00007ffc73b8b000 	C:\WINDOWS\SYSTEM32\NTASN1.dll
+
+VM Arguments:
+jvm_args: -Dvisualvm.id=14490694907200 -ea -Didea.test.cyclic.buffer.size=1048576 -javaagent:D:\Program Files\JetBrains\IntelliJ IDEA 2021.3.3\lib\idea_rt.jar=55951:D:\Program Files\JetBrains\IntelliJ IDEA 2021.3.3\bin -Dfile.encoding=UTF-8 
+java_command: com.intellij.rt.junit.JUnitStarter -ideVersion5 -junit5 com.weblog.esTest,testBulkRequest2
+java_class_path (initial): C:\Users\其然乐衣Letitbe\.m2\repository\org\junit\platform\junit-platform-launcher\1.8.2\junit-platform-launcher-1.8.2.jar;D:\Program Files\JetBrains\IntelliJ IDEA 2021.3.3\lib\idea_rt.jar;D:\Program Files\JetBrains\IntelliJ IDEA 2021.3.3\plugins\junit\lib\junit5-rt.jar;D:\Program Files\JetBrains\IntelliJ IDEA 2021.3.3\plugins\junit\lib\junit-rt.jar;C:\Users\其然乐衣Letitbe\.jdks\corretto-1.8.0_312\jre\lib\charsets.jar;C:\Users\其然乐衣Letitbe\.jdks\corretto-1.8.0_312\jre\lib\ext\access-bridge-64.jar;C:\Users\其然乐衣Letitbe\.jdks\corretto-1.8.0_312\jre\lib\ext\cldrdata.jar;C:\Users\其然乐衣Letitbe\.jdks\corretto-1.8.0_312\jre\lib\ext\dnsns.jar;C:\Users\其然乐衣Letitbe\.jdks\corretto-1.8.0_312\jre\lib\ext\jaccess.jar;C:\Users\其然乐衣Letitbe\.jdks\corretto-1.8.0_312\jre\lib\ext\jfxrt.jar;C:\Users\其然乐衣Letitbe\.jdks\corretto-1.8.0_312\jre\lib\ext\localedata.jar;C:\Users\其然乐衣Letitbe\.jdks\corretto-1.8.0_312\jre\lib\ext\nashorn.jar;C:\Users\其然乐衣Letitbe\.jdks\corretto-1.8.0_312\jre\lib\ext\sunec.jar;C:\Users\其然乐衣Letitbe\.jdks\corretto-1.8.0_312\jre\lib\ext\sunjce_provider.jar;C:\Users\其然乐衣Letitbe\.jdks\corretto-1.8.0_312\jre\lib\ext\sunmscapi.jar;C:\Users\其然乐衣Letitbe\.jdks\corretto-1.8.0_312\jre\lib\ext\sunpkcs11.jar;C:\Users\其然乐衣Letitbe\.jdks\corretto-1.8.0_312\jre\lib\ext\zipfs.jar;C:\Users\其然乐衣Letitbe\.jdks\corretto-1.8.0_312\jre\lib\jce.jar;C:\Users\其然乐衣Letitbe\.jdks\corretto-1.8.0_312\jre\lib\jfr.jar;C:\Users\其然乐衣Letitbe\.jdks\corretto-1.8.0_312\jre\lib\jfxswt.jar;C:\Users\其然乐衣Letitbe\.jdks\corretto-1.8.0_312\jre\lib\jsse.jar;C:\Users\其然乐衣Letitbe\.jdks\corretto-1.8.0_312\jre\lib\management-agent.jar;C:\Users\其然乐衣Letitbe\.jdks\corretto-1.8.0_312\jre\lib\resources.jar;C:\Users\其然乐衣Letitbe\.jdks\corretto-1.8.0_312\jre\lib\rt.jar;D:\Java\idea\weblog\target\test-classes;D:\Java\idea\weblog\target\classes;C:\Users\其然乐衣Letitbe\.m2\repository\org\projectlombok\lombok\1.18.24\lombok-1.18
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+JAVA_HOME=D:\Java
+PATH=D:\Program Files (x86)\VMware\VMware Workstation\bin\;D:\Program Files\MySQL\MySQL Server 5.5\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR\;C:\Program Files (x86)\Yozosoft\Yozo_Office\Lib\xuggler\bin;D:\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;D:\Users\其然乐衣Letitbe\Maven\apache-maven-3.6.0-bin\apache-maven-3.6.0\bin;C:\Program Files\PuTTY\;D:\texlive\texlive\2021\bin\win32;D:\Java\数据库MySQL\mysql-8.0.28-winx64\bin;C:\Program Files\MySQL\MySQL Server 8.0\bin;D:\Program Files\erl-24.2.1\bin;D:\Program Files (x86)\NetSarang\Xftp 7\;D:\Git\cmd;D:\Program Files (x86)\NetSarang\Xshell 7\;D:\nvm;D:\nodejs;"D:\nodejs;D:\nodejs\node_global;";C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\其然乐衣Letitbe\AppData\Local\Microsoft\WindowsApps;D:\Program Files\JetBrains\IntelliJ IDEA 2021.3.1\bin;;D:\altera\13.1\modelsim_ae\win32aloem;D:\altera\13.1\modelsim_ase\win32aloem;C:\Users\其然乐衣Letitbe\AppData\Local\GitHubDesktop\bin;D:\nodejs\node_global;D:\nvm;D:\nodejs;D:\APP\Vscode\Microsoft VS Code\bin;D:\nodejs\node_cache;
+USERNAME=其然乐衣Letitbe
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 142 Stepping 12, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 10.0 , 64 bit Build 19041 (10.0.19041.2364)
+
+CPU:total 8 (initial active 8) (4 cores per cpu, 2 threads per core) family 6 model 142 stepping 12, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, avx2, aes, clmul, erms, 3dnowpref, lzcnt, ht, tsc, tscinvbit, bmi1, bmi2, adx
+
+Memory: 4k page, physical 16601588k(3589248k free), swap 16601588k(5332k free)
+
+vm_info: OpenJDK 64-Bit Server VM (25.312-b07) for windows-amd64 JRE (1.8.0_312-b07), built on Oct 14 2021 21:08:49 by "Administrator" with MS VC++ 12.0 (VS2013)
+
+time: Thu Dec 22 13:14:27 2022
+timezone: ?D1ú±ê×?ê±??
+elapsed time: 22.522205 seconds (0d 0h 0m 22s)
+

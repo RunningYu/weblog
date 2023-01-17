@@ -1,0 +1,49 @@
+server:
+  port: 6868
+
+spring:
+  profiles:
+    active: dev
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates
+    mode: HTML
+  datasource:
+    url: xxxxxxxxx # 填写你的数据库url
+    username: xxx  # 数据库用户名
+    password: xxx  # 用户密码
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  servlet:
+    multipart:x
+      max-file-size: 50MB     # 设置单个文件大小
+      max-request-size: 50MB  # 设置单次请求文件的总大小
+
+  #  mvc:
+#    servlet:
+#      load-on-startup: 1
+
+  redis:
+    host: xxxxxxxxx            # redis不住的服务器ip地址
+    port: xxxx                 # redis 的端口号
+    password: xxxxxx           # redis 的用户登录密码
+
+  rabbitmq:
+    host:               # RabbitMq部署在的服务器ip地址
+    username:           # 用户名
+    password:           # 密码
+    virtual-host:       # 填写虚拟机名称
+    listener:
+      simple:
+        prefetch: 1    #（设置preFetch这个值，可以控制预取消息的上限）每次只能获取一条消息，处理完成才能获取下一个消息
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+
+minio:
+  endpoint: xxxxxxxxxx:xxx     # 部署minio的服务器 ip+端口
+  accessKey: minio                      
+  secretKey: xxxxx             # 用户名
+  bucket: xxxx                 # 创建的桶名
+
+ES:
+  url: xxxxxxxxxx:xxx      # Elasticsearch 部署的服务器 ip+端口
