@@ -2,7 +2,6 @@ package com.weblog.listener;
 
 import com.weblog.common.quartz.events.Events;
 import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;

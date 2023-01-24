@@ -81,7 +81,9 @@ public class updateDBtoES extends QuartzJobBean {
         client.bulk(request, RequestOptions.DEFAULT);
     }
 
-    //批量添加 到 tb_weblog_user
+    /**
+     * 批量添加 到 tb_weblog_user
+     */
     public void testBulkRequest3() throws IOException {
         //批量查询酒店的数量
         List<User> users = userService.list();

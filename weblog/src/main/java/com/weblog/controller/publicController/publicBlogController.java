@@ -1,6 +1,5 @@
 package com.weblog.controller.publicController;
 
-import com.weblog.VO.requestVo.VoBlog;
 import com.weblog.VO.responseVo.VoblogResponse;
 import com.weblog.common.JsonResult;
 import com.weblog.entity.Blog;

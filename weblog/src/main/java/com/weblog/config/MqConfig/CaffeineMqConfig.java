@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Configuration;
 @ApiModel(description = "缓存配置")
 @Configuration
 public class CaffeineMqConfig {
-
+    
     @ApiOperation("实现交换机的定义")
     @Bean
     public TopicExchange caffeineTopicExchange() {

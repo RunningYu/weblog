@@ -4,6 +4,7 @@ import com.weblog.VO.requestVo.VoBlog;
 import com.weblog.VO.responseVo.VoColumn;
 import com.weblog.VO.responseVo.VoblogResponse;
 import com.weblog.common.JsonResult;
+import com.weblog.common.MqCorrelationDate;
 import com.weblog.constants.MqConstants.*;
 import com.weblog.constants.other.CaffeineConstants;
 import com.weblog.entity.Blog;
@@ -14,6 +15,7 @@ import com.weblog.service.ICommentService;
 import com.weblog.service.IUserService;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -64,19 +66,20 @@ public class blogController {
 
         // 将博文与对应的专栏关联起来
         blogService.insertBlogIntoColumn( blogId, voBlog.getColumnIdList() );
+
         // 博文同步到ES索引库中
         // 数据同步请求发送                                  交换机                       RoutingLKey     内容
-        rabbitTemplate.convertAndSend(BlogMqConstants.BLOG_EXCHANGE, BlogMqConstants.BLOG_INSERT_KEY, blogId);
+        rabbitTemplate.convertAndSend(BlogMqConstants.BLOG_EXCHANGE, BlogMqConstants.BLOG_INSERT_KEY, blogId, MqCorrelationDate.getCorrelationData());
 
         // 用户的博文数量+1
         blogService.blogAmountAddOne(voBlog.getUserId());
         // User实体跟新到ES索引库中
         // 数据同步请求发送
-        rabbitTemplate.convertAndSend(UserMqConstants.USER_EXCHANGE, UserMqConstants.USER_INSERT_KEY, voBlog.getUserId());
+        rabbitTemplate.convertAndSend(UserMqConstants.USER_EXCHANGE, UserMqConstants.USER_INSERT_KEY, voBlog.getUserId(), MqCorrelationDate.getCorrelationData());
 
         if ( blogService.count() < 100 ) {
             // 同步 caffeine 和 redis 二级缓存中的热榜博文
-            rabbitTemplate.convertAndSend(CaffeineMqConstants.CAFFEINE_EXCHANGE, CaffeineMqConstants.CAFFEINE_INSERT_KEY, CaffeineConstants.HOT_BLOG_KEY);
+            rabbitTemplate.convertAndSend(CaffeineMqConstants.CAFFEINE_EXCHANGE, CaffeineMqConstants.CAFFEINE_INSERT_KEY, CaffeineConstants.HOT_BLOG_KEY, MqCorrelationDate.getCorrelationData());
         }
         return JsonResult.success("发布成功", 200);
     }
@@ -110,20 +113,20 @@ public class blogController {
 
         // 同步es
         // 同步删除博文
-        rabbitTemplate.convertAndSend(BlogMqConstants.BLOG_EXCHANGE, BlogMqConstants.BLOG_DELETE_KEY, id);
+        rabbitTemplate.convertAndSend(BlogMqConstants.BLOG_EXCHANGE, BlogMqConstants.BLOG_DELETE_KEY, id, MqCorrelationDate.getCorrelationData());
         // 同步删除评论
         for ( String id1 : comment_keyIds ) {
-            rabbitTemplate.convertAndSend(CommentMqConstants.COMMENT_EXCHANGE, CommentMqConstants.COMMENT_DELETE_KEY, id1);
+            rabbitTemplate.convertAndSend(CommentMqConstants.COMMENT_EXCHANGE, CommentMqConstants.COMMENT_DELETE_KEY, id1, MqCorrelationDate.getCorrelationData());
         }
         // 同步删除回复
         for ( String id1 : reply_keyIds ) {
-            rabbitTemplate.convertAndSend(ReplyMqConstants.REPLY_EXCHANGE, ReplyMqConstants.REPLY_DELETE_KEY, id1);
+            rabbitTemplate.convertAndSend(ReplyMqConstants.REPLY_EXCHANGE, ReplyMqConstants.REPLY_DELETE_KEY, id1, MqCorrelationDate.getCorrelationData());
         }
         // 同步用户的所获评论量（减去该博文博文的评论量）
-        rabbitTemplate.convertAndSend(UserMqConstants.USER_EXCHANGE, UserMqConstants.USER_INSERT_KEY, userId);
+        rabbitTemplate.convertAndSend(UserMqConstants.USER_EXCHANGE, UserMqConstants.USER_INSERT_KEY, userId, MqCorrelationDate.getCorrelationData());
 
         // 同步 caffeine 和 redis 二级缓存中的热榜博文
-        rabbitTemplate.convertAndSend(CaffeineMqConstants.CAFFEINE_EXCHANGE, CaffeineMqConstants.CAFFEINE_INSERT_KEY, CaffeineConstants.HOT_BLOG_KEY);
+        rabbitTemplate.convertAndSend(CaffeineMqConstants.CAFFEINE_EXCHANGE, CaffeineMqConstants.CAFFEINE_INSERT_KEY, CaffeineConstants.HOT_BLOG_KEY, MqCorrelationDate.getCorrelationData());
 
 
         return JsonResult.success("删除成功",200);
@@ -142,7 +145,7 @@ public class blogController {
         blogService.updateBlogByBlogId(voBlog.getBlogId(), voBlog.getTitle(), voBlog.getPublishImage(), voBlog.getDiscription(), voBlog.getContent(),
                 voBlog.getTag(), voBlog.getAbleLook(), voBlog.getStatus() );
         // 博文同步到ES索引库中
-        rabbitTemplate.convertAndSend(BlogMqConstants.BLOG_EXCHANGE, BlogMqConstants.BLOG_INSERT_KEY, voBlog.getBlogId());
+        rabbitTemplate.convertAndSend(BlogMqConstants.BLOG_EXCHANGE, BlogMqConstants.BLOG_INSERT_KEY, voBlog.getBlogId(), MqCorrelationDate.getCorrelationData());
 
         // 去重，找出新放到的专栏（需数据库建立关联） 和 去掉的专栏（需数据库删除关联）
         // 查询改博文之前的归属专栏
@@ -160,7 +163,7 @@ public class blogController {
         }
 
         // 同步 caffeine 和 redis 二级缓存中的热榜博文
-        rabbitTemplate.convertAndSend(CaffeineMqConstants.CAFFEINE_EXCHANGE, CaffeineMqConstants.CAFFEINE_INSERT_KEY, CaffeineConstants.HOT_BLOG_KEY);
+        rabbitTemplate.convertAndSend(CaffeineMqConstants.CAFFEINE_EXCHANGE, CaffeineMqConstants.CAFFEINE_INSERT_KEY, CaffeineConstants.HOT_BLOG_KEY, MqCorrelationDate.getCorrelationData());
 
         return JsonResult.error("草稿转为发布待审核状态", 200);
     }
@@ -182,9 +185,9 @@ public class blogController {
             // 博文的点赞量-1
             blogService.blogLikeAmountReduceOne(blogId);
             // es同步user实体
-            rabbitTemplate.convertAndSend(UserMqConstants.USER_EXCHANGE, UserMqConstants.USER_INSERT_KEY, blogUserId);
+            rabbitTemplate.convertAndSend(UserMqConstants.USER_EXCHANGE, UserMqConstants.USER_INSERT_KEY, blogUserId, MqCorrelationDate.getCorrelationData());
             // es同步blog
-            rabbitTemplate.convertAndSend(BlogMqConstants.BLOG_EXCHANGE, BlogMqConstants.BLOG_INSERT_KEY, blogId);
+            rabbitTemplate.convertAndSend(BlogMqConstants.BLOG_EXCHANGE, BlogMqConstants.BLOG_INSERT_KEY, blogId, MqCorrelationDate.getCorrelationData());
             return JsonResult.success("取消点赞成功", 200);
         }
         // 创建用户点赞博文关系
@@ -194,9 +197,9 @@ public class blogController {
         // 博文的点赞量+1
         blogService.blogLikeAmountAddOne(blogId);
         // es同步user实体
-        rabbitTemplate.convertAndSend(UserMqConstants.USER_EXCHANGE, UserMqConstants.USER_INSERT_KEY, blogUserId);
+        rabbitTemplate.convertAndSend(UserMqConstants.USER_EXCHANGE, UserMqConstants.USER_INSERT_KEY, blogUserId, MqCorrelationDate.getCorrelationData());
         // es同步blog
-        rabbitTemplate.convertAndSend(BlogMqConstants.BLOG_EXCHANGE, BlogMqConstants.BLOG_INSERT_KEY, blogId);
+        rabbitTemplate.convertAndSend(BlogMqConstants.BLOG_EXCHANGE, BlogMqConstants.BLOG_INSERT_KEY, blogId, MqCorrelationDate.getCorrelationData());
         return JsonResult.success("点赞成功", 200);
     }
 
@@ -497,9 +500,9 @@ public class blogController {
         Blog blog = blogService.getBlogFromDatabaseById(blogId);
         userService.userReadAmountAddOne(blog.getUserId());
         // 同步 caffeine 和 redis 二级缓存中的热榜博文
-        rabbitTemplate.convertAndSend(BlogMqConstants.BLOG_EXCHANGE, BlogMqConstants.BLOG_INSERT_KEY, blogId);
+        rabbitTemplate.convertAndSend(BlogMqConstants.BLOG_EXCHANGE, BlogMqConstants.BLOG_INSERT_KEY, blogId, MqCorrelationDate.getCorrelationData());
         String key = CaffeineConstants.HOT_BLOG_KEY;
-        rabbitTemplate.convertAndSend(CaffeineMqConstants.CAFFEINE_EXCHANGE, CaffeineMqConstants.CAFFEINE_INSERT_KEY,key);
+        rabbitTemplate.convertAndSend(CaffeineMqConstants.CAFFEINE_EXCHANGE, CaffeineMqConstants.CAFFEINE_INSERT_KEY,key, MqCorrelationDate.getCorrelationData());
         return JsonResult.success("浏览量+1", 200);
     }
 

@@ -1,12 +1,10 @@
 package com.weblog.config.MqConfig;
 
 import com.weblog.constants.MqConstants.CommentMqConstants;
+import com.weblog.constants.MqConstants.DlMqConstants;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.Queue;
-import org.springframework.amqp.core.TopicExchange;
+import org.springframework.amqp.core.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -18,23 +16,49 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class CommentMqConfig {
 
+//    @ApiOperation("实现交换机的定义")
+//    @Bean
+//    public TopicExchange commentTopicExchange() {
+//        return new TopicExchange(CommentMqConstants.COMMENT_EXCHANGE, true, false);
+//    }
+
     @ApiOperation("实现交换机的定义")
     @Bean
-    public TopicExchange commentTopicExchange() {
-        return new TopicExchange(CommentMqConstants.COMMENT_EXCHANGE, true, false);
+    public DirectExchange commentTopicExchange() {
+        return new DirectExchange(CommentMqConstants.COMMENT_EXCHANGE);
     }
+
+//    @ApiOperation("实现交换机的定义")
+//    @Bean
+//    public DirectExchange commentTopicExchange() {
+//        return ExchangeBuilder
+//                // 指定交换机类型和名称
+//                .directExchange(CommentMqConstants.COMMENT_EXCHANGE)
+//                // 指定交换机类型和名称
+//                .delayed()
+//                .durable( true )
+//                .build();
+//    }
 
     @ApiOperation("定义新增队列")
     @Bean
-    public Queue commentInsertQueue(){
+    public Queue commentInsertQueue() {
         return new Queue(CommentMqConstants.COMMENT_INSERT_QUEUE,true);
+
     }
 
     @ApiOperation("定义删除队列")
     @Bean
     public Queue commentDeleteQueue(){
-        return new Queue(CommentMqConstants.COMMENT_DELETE_QUEUE,true);
+//        return new Queue(CommentMqConstants.COMMENT_DELETE_QUEUE,true);
+        return QueueBuilder
+                .durable(CommentMqConstants.COMMENT_DELETE_QUEUE)
+                .ttl( 10000 )
+                .deadLetterExchange(DlMqConstants.DL_EXCHANGE)
+                .deadLetterRoutingKey(DlMqConstants.DL_KEY)
+                .build();
     }
+
 
     @ApiOperation("定义绑定关系")
     @Bean

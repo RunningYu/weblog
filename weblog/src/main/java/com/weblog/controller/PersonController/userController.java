@@ -4,6 +4,7 @@ import com.weblog.VO.requestVo.VoUserLogin;
 import com.weblog.VO.requestVo.VoUserTheme;
 import com.weblog.VO.responseVo.UploadResponse;
 import com.weblog.common.JsonResult;
+import com.weblog.common.MqCorrelationDate;
 import com.weblog.constants.MqConstants.UserMqConstants;
 import com.weblog.utils.JwtTokenManager;
 import com.weblog.utils.MD5;
@@ -80,7 +81,7 @@ public class userController {
             userService.addUser( phone, phone, mdCode );
             result.setMsg("该号码首次使用，已为该号码新建账号，用户名默认为号码，登录成功");
             user = userService.selectUserByPhone(phone);
-            rabbitTemplate.convertAndSend(UserMqConstants.USER_EXCHANGE, UserMqConstants.USER_INSERT_KEY, user.getId());
+            rabbitTemplate.convertAndSend(UserMqConstants.USER_EXCHANGE, UserMqConstants.USER_INSERT_KEY, user.getId(), MqCorrelationDate.getCorrelationData());
         }
         if ( !user.getPassword().equals(mdCode)) {
             // 密码错误
@@ -134,7 +135,7 @@ public class userController {
             // 被取消关注的人的粉丝数-1
             userService.fansAmountReduceOne( followedUserId );
             // es同步user
-            rabbitTemplate.convertAndSend(UserMqConstants.USER_EXCHANGE, UserMqConstants.USER_INSERT_KEY, userId);
+            rabbitTemplate.convertAndSend(UserMqConstants.USER_EXCHANGE, UserMqConstants.USER_INSERT_KEY, userId, MqCorrelationDate.getCorrelationData());
             return JsonResult.success("取消关注成功", 200);
         }
         // 创建关注记录
@@ -144,7 +145,7 @@ public class userController {
         // 被关注的用户的粉丝数+1
         userService.fansAmountAddOne( followedUserId );
         // es同步user
-        rabbitTemplate.convertAndSend(UserMqConstants.USER_EXCHANGE, UserMqConstants.USER_INSERT_KEY, userId);
+        rabbitTemplate.convertAndSend(UserMqConstants.USER_EXCHANGE, UserMqConstants.USER_INSERT_KEY, userId, MqCorrelationDate.getCorrelationData());
         return JsonResult.success("关注成功", 200);
     }
 
@@ -160,7 +161,7 @@ public class userController {
             return JsonResult.error("用户电话输入不规范", 400);
         }
         userService.updateUserInfo(userId, userName, phone, email, headShot);
-        rabbitTemplate.convertAndSend(UserMqConstants.USER_EXCHANGE, UserMqConstants.USER_INSERT_KEY, userId);
+        rabbitTemplate.convertAndSend(UserMqConstants.USER_EXCHANGE, UserMqConstants.USER_INSERT_KEY, userId, MqCorrelationDate.getCorrelationData());
         return JsonResult.success("修改成功", 200);
     }
 
@@ -176,7 +177,7 @@ public class userController {
         if ( md5.encrypt(prePassword).equals( user.getPassword() ) ) {
             String mdCode = md5.encrypt(newPassword);
             userService.updatePassword( userId, mdCode );
-            rabbitTemplate.convertAndSend(UserMqConstants.USER_EXCHANGE, UserMqConstants.USER_INSERT_KEY, userId);
+            rabbitTemplate.convertAndSend(UserMqConstants.USER_EXCHANGE, UserMqConstants.USER_INSERT_KEY, userId, MqCorrelationDate.getCorrelationData());
             return JsonResult.success("密码修改成功", 200);
         }
         return JsonResult.error("原密码输入错误，修改失败，请重新输入原密码", 400);

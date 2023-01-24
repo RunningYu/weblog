@@ -1,9 +1,7 @@
 package com.weblog.listener.MqListener;
 
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import com.weblog.constants.MqConstants.BlogMqConstants;
 import com.weblog.constants.MqConstants.ReplyMqConstants;
-import com.weblog.service.IBlogService;
 import com.weblog.service.ICommentService;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;

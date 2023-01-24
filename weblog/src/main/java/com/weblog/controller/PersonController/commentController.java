@@ -3,6 +3,7 @@ package com.weblog.controller.PersonController;
 import com.weblog.VO.responseVo.VoCommentRS;
 import com.weblog.VO.responseVo.VoReplyRS;
 import com.weblog.common.JsonResult;
+import com.weblog.common.MqCorrelationDate;
 import com.weblog.constants.MqConstants.BlogMqConstants;
 import com.weblog.constants.MqConstants.CommentMqConstants;
 import com.weblog.constants.MqConstants.ReplyMqConstants;
@@ -14,11 +15,16 @@ import com.weblog.service.IBlogService;
 import com.weblog.service.ICommentService;
 import com.weblog.service.IUserService;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.core.MessageBuilder;
+import org.springframework.amqp.core.MessageDeliveryMode;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -27,6 +33,7 @@ import java.util.UUID;
  * @author : 其然乐衣Letitbe
  * @date : 2022/12/13
  */
+@Slf4j
 @RestController
 @RequestMapping("/comment")
 public class commentController {
@@ -62,13 +69,16 @@ public class commentController {
         // 博文用户所获的总评论量+1
         userService.userCommentAmountAddOne(blogUserId);
 
+
+
         // 同步es
         // 同步评论
-        rabbitTemplate.convertAndSend(CommentMqConstants.COMMENT_EXCHANGE, CommentMqConstants.COMMENT_INSERT_KEY, commentId);
+        rabbitTemplate.convertAndSend(CommentMqConstants.COMMENT_EXCHANGE, CommentMqConstants.COMMENT_INSERT_KEY, commentId, MqCorrelationDate.getCorrelationData());
+        log.info(" ------------------> 已发送 发表评论的 消息 ");
         // 同步博文评论量
-        rabbitTemplate.convertAndSend(BlogMqConstants.BLOG_EXCHANGE, BlogMqConstants.BLOG_INSERT_KEY, blogId);
+        rabbitTemplate.convertAndSend(BlogMqConstants.BLOG_EXCHANGE, BlogMqConstants.BLOG_INSERT_KEY, blogId, MqCorrelationDate.getCorrelationData());
         // 同步User获得的评论量
-        rabbitTemplate.convertAndSend(UserMqConstants.USER_EXCHANGE, UserMqConstants.USER_INSERT_KEY, blogUserId);
+        rabbitTemplate.convertAndSend(UserMqConstants.USER_EXCHANGE, UserMqConstants.USER_INSERT_KEY, blogUserId, MqCorrelationDate.getCorrelationData());
 
         return JsonResult.success("评论成功", 200);
     }
@@ -94,13 +104,13 @@ public class commentController {
 
         // 同步es
         // 同步回复
-        rabbitTemplate.convertAndSend(ReplyMqConstants.REPLY_EXCHANGE, ReplyMqConstants.REPLY_INSERT_KEY, replyId );
+        rabbitTemplate.convertAndSend(ReplyMqConstants.REPLY_EXCHANGE, ReplyMqConstants.REPLY_INSERT_KEY, replyId, MqCorrelationDate.getCorrelationData() );
         // 同步评论的回复量
-        rabbitTemplate.convertAndSend(CommentMqConstants.COMMENT_EXCHANGE, CommentMqConstants.COMMENT_INSERT_KEY, commentId );
+        rabbitTemplate.convertAndSend(CommentMqConstants.COMMENT_EXCHANGE, CommentMqConstants.COMMENT_INSERT_KEY, commentId, MqCorrelationDate.getCorrelationData() );
         // 同步博文评论量
-        rabbitTemplate.convertAndSend(BlogMqConstants.BLOG_EXCHANGE, BlogMqConstants.BLOG_INSERT_KEY, blogId);
+        rabbitTemplate.convertAndSend(BlogMqConstants.BLOG_EXCHANGE, BlogMqConstants.BLOG_INSERT_KEY, blogId, MqCorrelationDate.getCorrelationData());
         // 同步User获得的评论量
-        rabbitTemplate.convertAndSend(UserMqConstants.USER_EXCHANGE, UserMqConstants.USER_INSERT_KEY, blogUserId);
+        rabbitTemplate.convertAndSend(UserMqConstants.USER_EXCHANGE, UserMqConstants.USER_INSERT_KEY, blogUserId, MqCorrelationDate.getCorrelationData());
 
         return JsonResult.success("回复成功", 200);
     }
@@ -131,15 +141,23 @@ public class commentController {
 
         // es同步
         // es同步删除评论
-        rabbitTemplate.convertAndSend(CommentMqConstants.COMMENT_EXCHANGE, CommentMqConstants.COMMENT_DELETE_KEY, id);
+        Message message = MessageBuilder
+                .withBody(id.getBytes(StandardCharsets.UTF_8))
+                // 给消息设置 ttl 为 五秒
+                .setExpiration("5000")
+                .build();
+        rabbitTemplate.convertAndSend(CommentMqConstants.COMMENT_EXCHANGE, CommentMqConstants.COMMENT_DELETE_KEY, message, MqCorrelationDate.getCorrelationData());
+        log.info("-------> 删除 发送");
+//        rabbitTemplate.convertAndSend(CommentMqConstants.COMMENT_EXCHANGE, CommentMqConstants.COMMENT_DELETE_KEY, id, MqCorrelationDate.getCorrelationData());
+
         // es同步删除评论的所有回复
         for ( String id1 : reply_keyIds ) {
-            rabbitTemplate.convertAndSend(ReplyMqConstants.REPLY_EXCHANGE, ReplyMqConstants.REPLY_DELETE_KEY, id1);
+            rabbitTemplate.convertAndSend(ReplyMqConstants.REPLY_EXCHANGE, ReplyMqConstants.REPLY_DELETE_KEY, id1, MqCorrelationDate.getCorrelationData());
         }
         //更新博文的评论量（减去（1 + 该评论的总回复量））
-        rabbitTemplate.convertAndSend(BlogMqConstants.BLOG_EXCHANGE, BlogMqConstants.BLOG_INSERT_KEY, blogId);
+        rabbitTemplate.convertAndSend(BlogMqConstants.BLOG_EXCHANGE, BlogMqConstants.BLOG_INSERT_KEY, blogId, MqCorrelationDate.getCorrelationData());
         // es同步更新博客的用户所获的评论量（减去（1 + 该评论的总回复量））
-        rabbitTemplate.convertAndSend(UserMqConstants.USER_EXCHANGE, UserMqConstants.USER_INSERT_KEY, blogUserId);
+        rabbitTemplate.convertAndSend(UserMqConstants.USER_EXCHANGE, UserMqConstants.USER_INSERT_KEY, blogUserId, MqCorrelationDate.getCorrelationData());
 
         return JsonResult.success("删除成功",200);
     }
@@ -164,13 +182,13 @@ public class commentController {
 
         // es同步
         // es同步删除回复
-        rabbitTemplate.convertAndSend(ReplyMqConstants.REPLY_EXCHANGE, ReplyMqConstants.REPLY_DELETE_KEY, replyId);
+        rabbitTemplate.convertAndSend(ReplyMqConstants.REPLY_EXCHANGE, ReplyMqConstants.REPLY_DELETE_KEY, replyId, MqCorrelationDate.getCorrelationData());
         // es同步更新评论的回复量（减去1）
-        rabbitTemplate.convertAndSend(CommentMqConstants.COMMENT_EXCHANGE, CommentMqConstants.COMMENT_INSERT_KEY, commentId);
+        rabbitTemplate.convertAndSend(CommentMqConstants.COMMENT_EXCHANGE, CommentMqConstants.COMMENT_INSERT_KEY, commentId, MqCorrelationDate.getCorrelationData());
         // es同步更新博文的评论量（减去1）
-        rabbitTemplate.convertAndSend(BlogMqConstants.BLOG_EXCHANGE, BlogMqConstants.BLOG_INSERT_KEY, blogId);
+        rabbitTemplate.convertAndSend(BlogMqConstants.BLOG_EXCHANGE, BlogMqConstants.BLOG_INSERT_KEY, blogId, MqCorrelationDate.getCorrelationData());
         // es同步更新博文的用户所获得评论量（减去1）
-        rabbitTemplate.convertAndSend(UserMqConstants.USER_EXCHANGE, UserMqConstants.USER_INSERT_KEY, blogUserId);
+        rabbitTemplate.convertAndSend(UserMqConstants.USER_EXCHANGE, UserMqConstants.USER_INSERT_KEY, blogUserId, MqCorrelationDate.getCorrelationData());
 
         return JsonResult.success("删除成功", 200);
     }
@@ -194,7 +212,7 @@ public class commentController {
             // 评论获赞量-1
             commentService.commentLikedAmountReduceOne(commentId);
             // es同步评论的点赞量
-            rabbitTemplate.convertAndSend(CommentMqConstants.COMMENT_EXCHANGE, CommentMqConstants.COMMENT_INSERT_KEY, commentId );
+            rabbitTemplate.convertAndSend(CommentMqConstants.COMMENT_EXCHANGE, CommentMqConstants.COMMENT_INSERT_KEY, commentId, MqCorrelationDate.getCorrelationData() );
             return JsonResult.success("取消点赞成功", 200);
         }
         // 创新点赞记录
@@ -202,7 +220,7 @@ public class commentController {
         // 评论获赞量+1
         commentService.commentLikedAmountAddOne(commentId);
         // es同步评论的点赞量
-        rabbitTemplate.convertAndSend(CommentMqConstants.COMMENT_EXCHANGE, CommentMqConstants.COMMENT_INSERT_KEY, commentId );
+        rabbitTemplate.convertAndSend(CommentMqConstants.COMMENT_EXCHANGE, CommentMqConstants.COMMENT_INSERT_KEY, commentId, MqCorrelationDate.getCorrelationData());
         return JsonResult.success("点赞成功", 200);
     }
 
@@ -218,7 +236,7 @@ public class commentController {
             // 回复获赞量-1
             commentService.replyLikedAmountReduceOne(replyId);
             // es同步回复的点赞量
-            rabbitTemplate.convertAndSend(ReplyMqConstants.REPLY_EXCHANGE, ReplyMqConstants.REPLY_INSERT_KEY, replyId );
+            rabbitTemplate.convertAndSend(ReplyMqConstants.REPLY_EXCHANGE, ReplyMqConstants.REPLY_INSERT_KEY, replyId, MqCorrelationDate.getCorrelationData() );
             return JsonResult.success("取消点赞成功", 200);
         }
         // 创新点赞记录
@@ -226,7 +244,7 @@ public class commentController {
         // 回复获赞量+1
         commentService.replyLikedAmountAddOne(replyId);
         // es同步回复的点赞量
-        rabbitTemplate.convertAndSend(ReplyMqConstants.REPLY_EXCHANGE, ReplyMqConstants.REPLY_INSERT_KEY, replyId );
+        rabbitTemplate.convertAndSend(ReplyMqConstants.REPLY_EXCHANGE, ReplyMqConstants.REPLY_INSERT_KEY, replyId, MqCorrelationDate.getCorrelationData() );
         return JsonResult.success("点赞成功", 200);
     }
 
