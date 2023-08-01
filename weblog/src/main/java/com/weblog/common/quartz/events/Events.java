@@ -32,7 +32,7 @@ public class Events {
                 trigger = TriggerBuilder.newTrigger()
                         .withIdentity(triggerKey)
                         // 设置每天凌晨4点触发
-                        .withSchedule(CronScheduleBuilder.cronSchedule("0 * 4 * * ?"))
+                        .withSchedule(CronScheduleBuilder.cronSchedule("0 0 4 * * ?"))
                         .startNow()
                         .build();
                 //                                      封装job
@@ -58,7 +58,7 @@ public class Events {
                 trigger = TriggerBuilder.newTrigger()
                         .withIdentity(triggerKey)
                         // 设置每天凌晨3点触发
-                        .withSchedule(CronScheduleBuilder.cronSchedule("0 * 3 * * ?"))
+                        .withSchedule(CronScheduleBuilder.cronSchedule("0 0 3 * * ?"))
                         .startNow()
                         .build();
                 //                                      封装job
